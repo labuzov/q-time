@@ -1,0 +1,129 @@
+$animDuration: 200ms;
+
+.container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: #000;
+    opacity: 0.5;
+}
+
+.modal {
+    position: relative;
+    margin: 8px;
+    background-color: var(--color-content-block-bg);
+    border-radius: 8px;
+    width: 100%;
+
+    &Header {
+        position: relative;
+        padding: 24px;
+        padding-bottom: 0;
+        padding-right: 64px;
+
+        .icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+            border: none;
+            transition: .1s;
+            border-radius: 50%;
+            background-color: var(--color-modal-close-icon-bg);
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--color-modal-close-icon-bg-hover);
+            }
+        }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            color: #777;
+        }
+    }
+
+    &Content {
+        padding: 24px;
+        max-height: 450px;
+        overflow: auto;
+    }
+
+    &Footer {
+        padding: 24px;
+        padding-top: 0;
+        border-top: 2px solid var(--color-line-divider);
+
+        &Inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .left, .right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .right {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.title {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.loading {
+    svg {
+        width: 24px;
+    }
+}
+
+.enter {
+    .backdrop,
+    .modal {
+        opacity: 0;
+    }
+}
+.enterActive {
+    .backdrop {
+        opacity: 0.5;
+        transition: $animDuration;
+    }
+    .modal {
+        opacity: 1;
+        transition: $animDuration;
+    }
+}
+.exit {
+    .backdrop {
+        opacity: 0.5;
+    }
+    .modal {
+        opacity: 1;
+    }
+}
+.exitActive {
+    .backdrop,
+    .modal {
+        opacity: 0;
+        transition: $animDuration;
+    }
+}

@@ -1,0 +1,117 @@
+$animDuration: 250ms;
+
+.bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.paper {
+    color: var(--color-drawer-paper);
+    background-color: var(--color-drawer-paper-bg);
+    position: fixed;
+
+    &.leftPos {
+        top: 0;
+        bottom: 0;
+        left: 0;
+    }
+    &.rightPos {
+        top: 0;
+        right: 0;
+        bottom: 0;
+    }
+    &.bottomPos {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.enter {
+    .bg {
+        opacity: 0;
+    }
+
+    .paper {
+        // opacity: 0;
+        transform: translateY(100%);
+
+        &.leftPos {
+            transform: translateX(-100%);
+        }
+        &.rightPos {
+            transform: translateX(100%);
+        }
+        &.bottomPos {
+            transform: translateY(100%);
+        }
+    }
+}
+.enterActive {
+    .bg {
+        opacity: 1;
+        transition: $animDuration;
+    }
+
+    .paper {
+        opacity: 1;
+        transition: $animDuration ease;
+
+        &.leftPos {
+            transform: translateX(0);
+        }
+        &.rightPos {
+            transform: translateX(0);
+        }
+        &.bottomPos {
+            transform: translateY(0);
+        }
+    }
+}
+.exit {
+    .bg {
+        opacity: 1;
+    }
+
+    .paper {
+        opacity: 1;
+        transform: translateY(0);
+
+        &.leftPos {
+            transform: translateX(0);
+        }
+        &.rightPos {
+            transform: translateX(0);
+        }
+        &.bottomPos {
+            transform: translateY(0);
+        }
+    }
+}
+.exitActive {
+    .bg {
+        opacity: 0;
+        transition: $animDuration;
+    }
+
+    .paper {
+        // opacity: 0;
+        transition: $animDuration;
+
+        &.leftPos {
+            transform: translateX(-100%);
+        }
+        &.rightPos {
+            transform: translateX(100%);
+        }
+        &.bottomPos {
+            transform: translateY(100%);
+        }
+    }
+}

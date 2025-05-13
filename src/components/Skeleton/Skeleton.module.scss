@@ -1,0 +1,17 @@
+.skeleton {
+    border-radius: 4px;
+    background-color: var(--color-skeleton-bg-1);
+    animation: 1.5s shine linear infinite;
+}
+
+@keyframes shine {
+    0% {
+        background-color: var(--color-skeleton-bg-1);
+    }
+    50% {
+        background-color: var(--color-skeleton-bg-2);
+    }
+    100% {
+        background-color: var(--color-skeleton-bg-1);
+    }
+}

@@ -1,0 +1,64 @@
+.button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    padding: 0.75rem 2rem;
+    background-color: var(--color-button-default-bg);
+    border: 2px solid var(--color-button-default-bg);
+    border-bottom: 4px solid var(--color-button-default-border);
+    color: var(--color-button-default-text);
+    text-align: center;
+    transition: .1s;
+    cursor: pointer;
+
+    &:hover, &:focus-visible {
+        opacity: 0.9;
+    }
+
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
+    }
+
+    &.variantOutlineSecondary {
+        background-color: var(--color-button-outline-secondary-bg);
+        border-color: var(--color-button-outline-secondary-border);
+        color: var(--color-text);
+
+        &:hover, &:focus-visible {
+            background-color: var(--color-button-outline-secondary-bg-hover);
+            border-color: var(--color-button-outline-secondary-border-hover);
+        }
+    }
+
+    &.variantOutline {
+        background-color: var(--color-button-outline-bg);
+        border-color: var(--color-button-outline-border);
+        color: var(--color-button-outline-text);
+        font-weight: 500;
+
+        &:hover, &:focus-visible {
+            background-color: var(--color-button-outline-bg-hover);
+        }
+
+        .spinner {
+            circle {
+                stroke: var(--color-button-outline-text);
+            }
+        }
+    }
+
+    &.variantText {
+        background-color: transparent;
+        border: none;
+        color: var(--color-primary);
+
+        &:hover, &:focus-visible {
+            color: var(--color-primary);
+            opacity: 1;
+        }
+    }
+}
+

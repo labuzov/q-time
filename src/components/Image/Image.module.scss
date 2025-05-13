@@ -1,0 +1,22 @@
+.image {
+    img {
+        object-fit: cover;
+    }
+}
+
+.skeleton {
+    transform-origin: 0;
+    transform: none;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-error);
+
+    svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}

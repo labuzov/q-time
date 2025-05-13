@@ -1,0 +1,22 @@
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: .1s;
+    color: var(--color-icon-button);
+
+    &:hover {
+        background-color: var(--color-icon-button-bg-hover);
+    }
+
+    &:active {
+        transform: scale(0.94);
+    }
+
+    svg {
+        width: 60%;
+        height: 60%;
+    }
+}

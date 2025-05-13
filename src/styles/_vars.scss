@@ -1,0 +1,29 @@
+:root {
+    --color-primary: #246AFE;
+
+    --color-text: #333;
+    --color-text-secondary: #999;
+    --color-text-disabled: #aaa;
+    --color-bg: #f6f6f6;
+
+    --color-nav-item: #999;
+    --color-nav-item-hover: #999;
+    --color-nav-item-hover-bg: #f6f6f6;
+    --color-nav-item-active: var(--color-primary);
+    --color-nav-item-active-bg: #EAF1FF;
+
+    --color-paper-bg: #fff;
+    --shadow-paper: 0px 0px 8px 0px rgba(0, 0, 0, 0.03);
+    
+    --color-header-bg: #fff;
+    --color-header-border: #c8c8c8;
+    --color-header-text: var(--color-text);
+    --shadow-header: 0px 0px 8px 0px #eee;
+
+    --color-checkbox-bg: transparent;
+    --color-checkbox-border: #e4e4e4;
+
+    --color-divider: #ddd;
+
+    --color-error: #F03040;
+}
