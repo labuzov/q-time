@@ -1,5 +1,7 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import classNames from 'classnames';
 
+import { Question, Quiz as QuizT } from '@/@types/quiz';
 import { Breakpoints } from '@/constants/screen';
 
 import { Button } from '@/components/Button';
@@ -11,44 +13,64 @@ import styles from './Quiz.module.scss';
 
 
 type Props = {
-    
+    quiz: QuizT;
+    questions: Question[];
+    currentQuestion: Question;
+    currentQuestionIndex: number;
+    progress: number;
+    onAnswerSubmit: (answerId: string) => void;
 }
 
-export const Quiz: FC<Props> = ({ }) => {
+export const Quiz: FC<Props> = ({
+    quiz, questions, currentQuestion, currentQuestionIndex, progress, onAnswerSubmit
+}) => {
+    const [selectedId, setSelectedId] = useState<string | null>(null);
+
+    const questionNumber = currentQuestionIndex + 1;
+    const questionCount = questions.length;
+
+    const handleSelect = (id: string) => {
+        setSelectedId(id);
+    }
+
+    const handleAnswerSubmit = () => {
+        if (!selectedId) return;
+
+        onAnswerSubmit(selectedId);
+        setSelectedId(null);
+    }
 
     return (
         <Container maxWidth={Breakpoints.M} className={styles.container}>
-            <Typography className={styles.title} variant="h2">Название квиза</Typography>
-            <Typography className={styles.questionNumber}>Вопрос 1/7</Typography>
+            <Typography className={styles.title} variant="h2">{quiz.title}</Typography>
+            <Typography className={styles.questionNumber}>Вопрос {questionNumber}/{questionCount}</Typography>
 
-            <ProgressBar progress={90} />
+            <ProgressBar progress={progress} />
 
             <div className={styles.card}>
-                <Typography variant="h3" className={styles.cardTitle}>1. Название вопроса</Typography>
+                <Typography variant="h3" className={styles.cardTitle}>{questionNumber}. {currentQuestion.title}</Typography>
 
                 <div className={styles.cardContent}>
-                    <div className={styles.cardAnswer}>
-                        <div className={styles.cardAnswerCheckbox} />
-                        <Typography className={styles.cardAnswerText}>Ответ 1</Typography>
-                    </div>
-                    <div className={styles.cardAnswer}>
-                        <div className={styles.cardAnswerCheckbox} />
-                        <Typography className={styles.cardAnswerText}>Ответ 1</Typography>
-                    </div>
-                    <div className={`${styles.cardAnswer} ${styles.cardAnswerSelected}`}>
-                        <div className={styles.cardAnswerCheckbox} />
-                        <Typography className={styles.cardAnswerText}>Ответ 1</Typography>
-                    </div>
-                    <div className={styles.cardAnswer}>
-                        <div className={styles.cardAnswerCheckbox} />
-                        <Typography className={styles.cardAnswerText}>Ответ 1</Typography>
-                    </div>
+                    {currentQuestion.answers?.map(answer => (
+                        <div
+                            key={answer.id}
+                            className={classNames(
+                                styles.cardAnswer,
+                                selectedId === answer.id && styles.cardAnswerSelected
+                            )}
+                            onClick={() => handleSelect(answer.id)}
+                        >
+                            <div className={styles.cardAnswerCheckbox} />
+                            <Typography className={styles.cardAnswerText}>{answer.title}</Typography>
+                        </div>
+                    ))}
                 </div>
             </div>
 
             <div className={styles.actions}>
                 <Button
-                    
+                    disabled={!selectedId}
+                    onClick={handleAnswerSubmit}
                 >
                     <Typography textId="quiz.button.next" />
                 </Button>

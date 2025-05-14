@@ -14,9 +14,10 @@ type Props = {
     title: string;
     description: string;
     src: string;
+    onStart: () => Promise<void>;
 }
 
-export const Preview: FC<Props> = ({ title, description, src }) => {
+export const Preview: FC<Props> = ({ title, description, src, onStart }) => {
 
     return (
         <Container maxWidth={Breakpoints.S} className={styles.container}>
@@ -31,7 +32,7 @@ export const Preview: FC<Props> = ({ title, description, src }) => {
 
             <div className={styles.actions}>
                 <Button
-                    
+                    onClick={onStart}
                 >
                     <Typography textId="quiz.button.start" />
                 </Button>
