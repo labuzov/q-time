@@ -1,10 +1,20 @@
 import { FC } from 'react';
 
+import { Welcome } from './Welcome/Welcome';
+import { QuizList } from './QuizList/QuizList';
+import { Footer } from './Footer/Footer';
+
 
 const HomePage: FC = () => {
 
     return ( 
-        <div className="">home</div>
+        <div>
+            <Welcome />
+
+            <QuizList />
+
+            <Footer />
+        </div>
     );
 }
 

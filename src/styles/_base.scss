@@ -1,11 +1,12 @@
 body {
     margin: 0;
-    font-family: 'Comic Relief', 'Helvetica Neue', sans-serif;
+    font-family: 'Onest', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--color-text);
     background-color: var(--color-bg);
     -webkit-tap-highlight-color: transparent;
+    line-height: 1.4;
 }
 
 html {

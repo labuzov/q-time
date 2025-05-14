@@ -1,0 +1,29 @@
+.wrapper {
+    height: 100vh;
+    background-color: var(--color-welcome-bg);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.image {
+    width: 500px;
+    color: var(--color-primary);
+    color: #6c63ff;
+}
+
+.button {
+    margin-top: 2rem;
+}
+
+.text {
+    margin-right: 3rem;
+
+    &Secondary {
+        margin-top: 0.5rem;
+        color: var(--color-text-secondary);
+    }
+}

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { HTMLProps, useState } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
+import classNames from 'classnames';
 
 import { Skeleton } from '@/components/Skeleton';
 
@@ -15,13 +16,13 @@ enum ImageStatus {
     Error
 }
 
-type ImageProps = {
+type ImageProps = HTMLProps<HTMLDivElement> & {
     src?: string;
     width?: number | string;
     height?: number | string;
 }
 
-export const Image: React.FC<ImageProps> = ({ src, ...props }) => {
+export const Image: React.FC<ImageProps> = ({ src, className, ...props }) => {
     const [status, setStatus] = useState(ImageStatus.None);
 
     const width = props.width ?? DEFAULT_WIDTH;
@@ -50,7 +51,8 @@ export const Image: React.FC<ImageProps> = ({ src, ...props }) => {
     return (
         <>
             <div
-                className={styles.image}
+                {...props}
+                className={classNames(styles.image, className)}
                 style={{ display: status === ImageStatus.Loaded ? 'flex' : 'none', width, height }}
             >
                 <img

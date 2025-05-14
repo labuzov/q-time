@@ -1,3 +1,9 @@
 {
-    
+    "home.welcome.text.primary": "Онлайн-квизы",
+    "home.welcome.text.secondary": "Квизы онлайн",
+    "home.welcome.button": "Создать квиз",
+    "home.quiz.list.text": "Доступные квизы",
+
+    "quiz.button.start": "Запустить квиз",
+    "quiz.button.next": "Ответить"
 }

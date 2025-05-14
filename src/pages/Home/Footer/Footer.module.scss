@@ -1,0 +1,38 @@
+.wrapper {
+    background-color: var(--color-footer-bg);
+    padding: 2rem 0;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color: var(--color-text-secondary);
+}
+
+.name {
+    margin-right: 1rem;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+
+    &Icon {
+        margin-right: 0.25rem;
+    }
+
+    a {
+        margin-left: 0.5rem;
+        color: var(--color-text);
+        text-decoration: underline;
+        font-weight: 700;
+        transition: .1s;
+
+        &:hover {
+            color: var(--color-primary);
+        }
+    }
+}

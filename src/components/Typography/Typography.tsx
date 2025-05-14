@@ -1,22 +1,35 @@
-import { HTMLProps, FC } from 'react';
+import { HTMLProps, FC, PropsWithChildren } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TOptions } from 'i18next';
+import classNames from 'classnames';
 
-import { i18nNamespace } from '@/i18n';
+import { TypographyVariant } from './types';
+import styles from './Typography.module.scss';
 
 
-type Props = HTMLProps<HTMLDivElement> & {
+type Props = HTMLProps<HTMLDivElement> & PropsWithChildren & {
     textId?: string;
-    ns?: i18nNamespace;
+    variant?: TypographyVariant;
     textOptions?: TOptions;
 }
 
-export const Typography: FC<Props> = ({ textId, ns, textOptions, ...props }) => {
+export const Typography: FC<Props> = ({ textId, variant, textOptions, className, children, ...props }) => {
     const { t } = useTranslation();
 
     return ( 
-        <div {...props}>
-            {t(textId ?? '', { ns, ...textOptions })}
+        <div
+            {...props}
+            className={classNames(
+                className,
+                variant && styles[variant],
+            )}
+        >
+            {!!textId && (
+                <>
+                    {t(textId, textOptions)}
+                </>
+            )}
+            {children}
         </div>
     );
 }

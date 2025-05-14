@@ -1,3 +1,3 @@
-export enum KeyCodes {
+export const enum KeyCodes {
     Escape = 'Escape',
 }

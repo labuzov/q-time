@@ -1,6 +1,6 @@
 export const ROUTES = {
-    login: {
-        path: '/login',
-        get: () => '/login'
+    quiz: {
+        path: '/quiz/:id',
+        get: (id: string) => `/quiz/${id}`
     },
 }

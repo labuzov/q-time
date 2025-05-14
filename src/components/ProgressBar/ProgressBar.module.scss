@@ -1,0 +1,27 @@
+.progress {
+    position: relative;
+    background-color: var(--color-paper-bg);
+    border-radius: 1rem;
+    height: 1.5rem;
+    width: 100%;
+    overflow: hidden;
+
+    &Done {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        width: 15%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--color-primary);
+        transition: .1s;
+    }
+
+    &Percent {
+        font-size: 0.75rem;
+        color: #fff;
+        line-height: 1;
+    }
+}
