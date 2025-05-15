@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g npm
@@ -26,7 +26,6 @@ jobs:
         run: |
           npm ci
           npm run build
-          fi
       - name: Archive Build
         uses: actions/upload-artifact@v4
         with:
@@ -46,8 +45,8 @@ jobs:
         with:
           name: dist
           path: dist
-      - name: Deploy to Firebase
       - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Deploy to Firebase
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_Q_TIME_APP }}
