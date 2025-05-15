@@ -1,3 +1,5 @@
+@use "/src/styles/shared" as shared;
+
 .container {
     display: flex;
     align-items: center;
@@ -48,6 +50,22 @@
             .cardAnswerCheckbox {
                 background-color: var(--color-primary);
             }
+        }
+    }
+
+    @include shared.bp-m {
+        padding: 2.5rem;
+
+        &Title {
+            margin-bottom: 2.5rem;
+        }
+    }
+
+    @include shared.bp-s {
+        padding: 2rem;
+
+        &Title {
+            margin-bottom: 2rem;
         }
     }
 }

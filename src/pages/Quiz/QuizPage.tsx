@@ -17,7 +17,7 @@ const QuizPage: FC = () => {
 
     const { id: quizId } = useParams<{ id: string }>();
 
-    const { isLoading, addToLoading } = useLoading();
+    const { isLoading, isCompletedOnce, addToLoading } = useLoading();
 
     useEffect(() => {
         init();
@@ -35,7 +35,7 @@ const QuizPage: FC = () => {
             progress, isStarted, isEnded, userAnswers, startQuiz, submitAnswer 
         } = store;
 
-        if (isLoading) return (
+        if (!isCompletedOnce || isLoading) return (
             <Loading fillContainer />
         );
 

@@ -9,6 +9,7 @@ import { Typography } from '@/components/Typography';
 
 import { QuizItem } from './QuizItem/QuizItem';
 import styles from './QuizList.module.scss';
+import { InViewAnimation } from '@/components/InViewAnimation';
 
 
 export const QuizList: FC = () => {
@@ -31,7 +32,9 @@ export const QuizList: FC = () => {
         <Container maxWidth={Breakpoints.L}>
             <div className={styles.content}>
                 <div className={styles.text}>
-                    <Typography textId="home.quiz.list.text" variant="h2" />
+                    <InViewAnimation variant="translateLeft">
+                        <Typography textId="home.quiz.list.text" variant="h2" />
+                    </InViewAnimation>
                 </div>
                 <div className={styles.list}>
                     {quizItems}

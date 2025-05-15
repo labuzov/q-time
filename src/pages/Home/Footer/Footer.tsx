@@ -14,7 +14,7 @@ export const Footer: FC = () => {
     return ( 
         <div className={styles.wrapper}>
             <Container maxWidth={Breakpoints.L} className={styles.container}>
-                <Typography variant="caption" className={styles.name}>Sergey Labuzov</Typography>
+                <Typography variant="caption" className={styles.name}>Developed by Sergey Labuzov</Typography>
                 <div className={styles.links}>
                     <div className={styles.link}>
                         <FaGithub className={styles.linkIcon} />
