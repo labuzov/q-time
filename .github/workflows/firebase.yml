@@ -45,8 +45,8 @@ jobs:
         with:
           name: dist
           path: dist
-      - uses: FirebaseExtended/action-hosting-deploy@v0
       - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_Q_TIME_APP }}
