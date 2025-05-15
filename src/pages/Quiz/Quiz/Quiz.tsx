@@ -43,7 +43,11 @@ export const Quiz: FC<Props> = ({
     return (
         <Container maxWidth={Breakpoints.M} className={styles.container}>
             <Typography className={styles.title} variant="h2">{quiz.title}</Typography>
-            <Typography className={styles.questionNumber}>Вопрос {questionNumber}/{questionCount}</Typography>
+            <Typography
+                textId="quiz.current.question"
+                textOptions={{ questionNumber, questionCount }}
+                className={styles.questionNumber}
+            />
 
             <ProgressBar progress={progress} />
 

@@ -5,5 +5,14 @@
     "home.quiz.list.text": "Доступные квизы",
 
     "quiz.button.start": "Запустить квиз",
-    "quiz.button.next": "Ответить"
+    "quiz.button.next": "Ответить",
+    "quiz.button.goHome": "Вернуться на главную",
+    "quiz.current.question": "Вопрос {{questionNumber}}/{{questionCount}}",
+    "quiz.result.text": "Вы ответили правильно на {{correct}} из {{count}} вопросов",
+
+    "error.default.text": "Ошибка",
+    "error.default.description": "Что-то пошло не так. Уже работаем над этим",
+    "error.404.text": "Страница не найдена",
+    "error.404.description": "Запрашиваемый вами ресурс не существует или был удален",
+    "error.button.goHome": "Вернуться на главную"
 }

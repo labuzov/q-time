@@ -1,6 +1,16 @@
+@use "/src/styles/shared" as shared;
+
 .wrapper {
     background-color: var(--color-footer-bg);
     padding: 2rem 0;
+
+    @include shared.bp-m {
+        padding: 1.75rem 0;
+    }
+
+    @include shared.bp-s {
+        padding: 1.5rem 0;
+    }
 }
 
 .container {

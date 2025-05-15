@@ -2,9 +2,10 @@ import { create } from 'zustand';
 
 import { Question, Quiz } from '@/@types/quiz';
 import { getQuizProgress } from './utils';
+import { quizApi } from '@/api/quizApi';
 
 
-type UserAnswer = {
+export type UserAnswer = {
     questionId: string;
     value: string[];
 }
@@ -34,14 +35,7 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     progress: 0,
 
     initQuiz: async (quizId: string) => {
-        // load quiz
-        const quiz: Quiz = {
-            title: 'Название квиза',
-            description: 'Описание квиза',
-            id: 'quiz1',
-            image: 'https://uploads.yasno.live/uploads/psy_test/cover_photo/241/large_2x_Опенер.png',
-            createdBy: 'someuserid'
-        }
+        const quiz = await quizApi.getQuizById(quizId);
 
         set({
             quiz,
@@ -56,41 +50,15 @@ export const useQuizStore = create<QuizState>((set, get) => ({
     },
 
     startQuiz: async () => {
-        // load questions
-        const questions: Question[] = [
-            {
-                id: 'id1',
-                title: 'Первый вопрос',
-                answers: [
-                    { id: 'a1', title: 'Ответ 1', isCorrect: false },
-                    { id: 'a2', title: 'Ответ 2', isCorrect: false },
-                    { id: 'a3', title: 'Ответ 3', isCorrect: true }
-                ]
-            },
-            {
-                id: 'id2',
-                title: 'Второй вопрос',
-                answers: [
-                    { id: 'a4', title: 'Ответ 1', isCorrect: true },
-                    { id: 'a5', title: 'Ответ 2', isCorrect: false },
-                    { id: 'a6', title: 'Ответ 3', isCorrect: false }
-                ]
-            },
-            {
-                id: 'id3',
-                title: 'Третий вопрос',
-                answers: [
-                    { id: 'a7', title: 'Ответ 1', isCorrect: true },
-                    { id: 'a8', title: 'Ответ 2', isCorrect: false },
-                    { id: 'a9', title: 'Ответ 3', isCorrect: false }
-                ]
-            }
-        ];
+        const { quiz } = get();
+        if (!quiz?.id) return;
+
+        const questions = await quizApi.getQuizQuestions(quiz.id);
 
         set({
             isStarted: true,
             questions,
-            currentQuestion: questions[0],
+            currentQuestion: questions?.[0],
             currentQuestionIndex: 0
         });
     },

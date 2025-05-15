@@ -1,3 +1,32 @@
+$xs-width: '425px';
+$s-width: '600px';
+$m-width: '768px';
+$l-width: '1024px';
+
+@mixin bp-xs() {
+  @media screen and (max-width: $xs-width) {
+    @content();
+  }
+}
+
+@mixin bp-s() {
+  @media screen and (max-width: $s-width) {
+    @content();
+  }
+}
+
+@mixin bp-m() {
+  @media screen and (max-width: $m-width) {
+    @content();
+  }
+}
+
+@mixin bp-l() {
+  @media screen and (max-width: $l-width) {
+    @content();
+  }
+}
+
 %text-ellipsis {
     white-space: nowrap;
     overflow: hidden;

@@ -34,7 +34,7 @@ export const Welcome: FC = () => {
                     </Button>
                 </div>
                 <div className={styles.image}>
-                    <Image src="assets/welcome.svg" />
+                    <Image src="/assets/welcome.svg" />
                 </div>
             </Container>
         </div>

@@ -1,5 +1,15 @@
-.container {
+@use "/src/styles/shared" as shared;
+
+.content {
     padding: 3rem 0;
+
+    @include shared.bp-m {
+        padding: 2.5rem 0;
+    }
+
+    @include shared.bp-s {
+        padding: 2rem 0;
+    }
 }
 
 .text {
@@ -13,4 +23,12 @@
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 1.5rem;
+
+    @include shared.bp-m {
+        margin-top: 2.5rem;
+    }
+
+    @include shared.bp-s {
+        margin-top: 2rem;
+    }
 }

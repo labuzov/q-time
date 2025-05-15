@@ -1,27 +1,65 @@
+@use "/src/styles/shared" as shared;
+
 .h1 {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.1;
+
+    @include shared.bp-m {
+        font-size: 2rem;
+    }
+
+    @include shared.bp-s {
+        font-size: 1.75rem;
+    }
 }
 
 .h2 {
     font-size: 2rem;
     font-weight: 700;
     line-height: 1.1;
+
+    @include shared.bp-m {
+        font-size: 1.75rem;
+    }
+
+    @include shared.bp-s {
+        font-size: 1.5rem;
+    }
 }
 
 .h3 {
     font-size: 1.75rem;
     font-weight: 700;
     line-height: 1.2;
+
+    @include shared.bp-m {
+        font-size: 1.5rem;
+    }
+
+    @include shared.bp-s {
+        font-size: 1.25rem;
+    }
 }
 
 .h4 {
     font-size: 1.5rem;
+
+    @include shared.bp-m {
+        font-size: 1.25rem;
+    }
+
+    @include shared.bp-s {
+        font-size: 1rem;
+    }
 }
 
 .h5 {
     font-size: 1.25rem;
+
+    @include shared.bp-s {
+        font-size: 1rem;
+    }
 }
 
 .caption {

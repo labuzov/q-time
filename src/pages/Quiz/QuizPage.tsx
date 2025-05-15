@@ -1,84 +1,83 @@
 import { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useShallow } from 'zustand/shallow';
 
 import { useQuizStore } from '@/stores/QuizStore';
+import { useLoading } from '@/hooks/useLoading';
 
 import { Loading } from '@/components/Loading';
 
 import { Preview } from './Preview/Preview';
 import { Quiz } from './Quiz/Quiz';
+import { Result } from './Result/Result';
+import { ErrorPage } from '../Errors/ErrorPage';
 
 
 const QuizPage: FC = () => {
-    const {
-        quiz,
-        questions,
-        currentQuestion,
-        currentQuestionIndex,
-        isStarted,
-        isEnded,
-        progress,
-        initQuiz,
-        startQuiz,
-        submitAnswer
-    } = useQuizStore(useShallow(({
-        quiz,
-        questions,
-        currentQuestion,
-        currentQuestionIndex,
-        isStarted,
-        isEnded,
-        progress,
-        initQuiz,
-        startQuiz,
-        submitAnswer
-    }) => ({
-        quiz,
-        questions,
-        currentQuestion,
-        currentQuestionIndex,
-        isStarted,
-        isEnded,
-        progress,
-        initQuiz,
-        startQuiz,
-        submitAnswer
-    })));
+    const store = useQuizStore();
 
     const { id: quizId } = useParams<{ id: string }>();
 
+    const { isLoading, addToLoading } = useLoading();
+
     useEffect(() => {
-        quizId && initQuiz(quizId);
+        init();
     }, [quizId]);
 
-    if (!quiz) return (
-        <Loading fillContainer />
-    );
+    const init = () => {
+        if (!quizId) return;
+
+        addToLoading(() => store.initQuiz(quizId));
+    }
+
+    const renderContent = () => {
+        const {
+            quiz, questions, currentQuestion, currentQuestionIndex,
+            progress, isStarted, isEnded, userAnswers, startQuiz, submitAnswer 
+        } = store;
+
+        if (isLoading) return (
+            <Loading fillContainer />
+        );
+
+        const isPreview = !isStarted && !!quiz;
+        if (isPreview) return (
+            <Preview
+                title={quiz.title}
+                description={quiz.description}
+                src={quiz.image}
+                onStart={startQuiz}
+            />
+        );
+    
+        const isQuizStarted = isStarted && !!quiz && currentQuestion;
+        if (isQuizStarted) return (
+            <Quiz
+                quiz={quiz}
+                questions={questions}
+                currentQuestion={currentQuestion}
+                currentQuestionIndex={currentQuestionIndex!}
+                progress={progress}
+                onAnswerSubmit={answerId => submitAnswer(currentQuestion?.id, [answerId])}
+            />
+        );
+
+        const isQuizEnded = isEnded;
+        if (isQuizEnded) return (
+            <Result
+                questions={questions}
+                userAnswers={userAnswers}
+            />
+        );
+
+        return (
+            <ErrorPage />
+        );
+    }
+
 
     return (
         <>
-            {isStarted && currentQuestion && (
-                <Quiz
-                    quiz={quiz}
-                    questions={questions}
-                    currentQuestion={currentQuestion}
-                    currentQuestionIndex={currentQuestionIndex!}
-                    progress={progress}
-                    onAnswerSubmit={answerId => submitAnswer(currentQuestion?.id, [answerId])}
-                />
-            )}
-            {!isStarted && (
-                <Preview
-                    title={quiz.title}
-                    description={quiz.description}
-                    src={quiz.image}
-                    onStart={startQuiz}
-                />
-            )}
-            {isEnded && (
-                <div className="">end</div>
-            )}
+            {renderContent()}
         </>
         
     );

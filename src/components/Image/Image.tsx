@@ -64,12 +64,12 @@ export const Image: React.FC<ImageProps> = ({ src, className, ...props }) => {
                 />
             </div>
 
-            {status === ImageStatus.None && (
+            {!!src && status === ImageStatus.None && (
                 <>
                     {renderLoading()}
                 </>
             )}
-            {status === ImageStatus.Error && (
+            {(!src || status === ImageStatus.Error) && (
                 <>
                     {renderError()}
                 </>

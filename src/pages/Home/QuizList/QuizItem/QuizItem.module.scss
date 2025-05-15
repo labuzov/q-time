@@ -1,3 +1,5 @@
+@use "/src/styles/shared" as shared;
+
 .wrapper {
     background-color: var(--color-paper-bg);
     border-radius: 1rem;
@@ -13,6 +15,14 @@
         .title {
             color: var(--color-primary);
         }
+    }
+
+    @include shared.bp-m {
+        grid-column: span 6 / span 6;
+    }
+
+    @include shared.bp-s {
+        grid-column: span 12 / span 12;
     }
 }
 
@@ -32,10 +42,13 @@
     font-weight: 500;
     font-size: 1.25rem;
     transition: .2s;
+    word-break: break-all;
+    word-break: break-word;
 }
 
 .description {
     margin-top: 1rem;
     color: var(--color-text-secondary);
     word-break: break-all;
+    word-break: break-word;
 }

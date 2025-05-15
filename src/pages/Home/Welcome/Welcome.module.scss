@@ -1,3 +1,5 @@
+@use "/src/styles/shared" as shared;
+
 .wrapper {
     height: 100vh;
     background-color: var(--color-welcome-bg);
@@ -7,10 +9,23 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 3rem;
+
+    @include shared.bp-m {
+        flex-direction: column-reverse;
+        justify-content: center;
+
+        .text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
 }
 
 .image {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     color: var(--color-primary);
     color: #6c63ff;
 }
@@ -20,7 +35,6 @@
 }
 
 .text {
-    margin-right: 3rem;
 
     &Secondary {
         margin-top: 0.5rem;

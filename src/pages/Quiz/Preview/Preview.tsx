@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import { Breakpoints } from '@/constants/screen';
+import { useLoading } from '@/hooks/useLoading';
 
 import { Image } from '@/components/Image';
 import { Button } from '@/components/Button';
@@ -18,9 +19,14 @@ type Props = {
 }
 
 export const Preview: FC<Props> = ({ title, description, src, onStart }) => {
+    const { isLoading, addToLoading } = useLoading();
+
+    const handleStartClick = () => {
+        addToLoading(onStart);
+    }
 
     return (
-        <Container maxWidth={Breakpoints.S} className={styles.container}>
+        <Container maxWidth={Breakpoints.M} className={styles.container}>
             <div className={styles.image}>
                 <Image src={src} />
             </div>
@@ -32,7 +38,8 @@ export const Preview: FC<Props> = ({ title, description, src, onStart }) => {
 
             <div className={styles.actions}>
                 <Button
-                    onClick={onStart}
+                    disabled={isLoading}
+                    onClick={handleStartClick}
                 >
                     <Typography textId="quiz.button.start" />
                 </Button>
