@@ -17,17 +17,14 @@ import { OverlayComponentBase } from './types';
 export const OverlayComponentsContainer: React.FC = () => {
     const {
         components,
-        visibleIds,
         closeComponentById,
         closeLastComponent
     } = useOverlayComponentsStore(useShallow(({
             components,
-            visibleIds,
             closeComponentById,
             closeLastComponent
         }) => ({
             components,
-            visibleIds,
             closeComponentById,
             closeLastComponent
         })));
@@ -43,7 +40,7 @@ export const OverlayComponentsContainer: React.FC = () => {
     }, [components]);
 
     useEffect(() => {
-        if (visibleIds.length && isScrollbarVisible()) {
+        if (components.length && isScrollbarVisible()) {
             const width = scrollbarWidth.current ?? getScrollbarWidth();
             scrollbarWidth.current = width;
 
@@ -51,7 +48,7 @@ export const OverlayComponentsContainer: React.FC = () => {
         } else {
             removeScrollbarPadding();
         }
-    }, [visibleIds]);
+    }, [components]);
 
     const getZIndex = (index: number) => 100 + index * 10;
 
@@ -77,7 +74,6 @@ export const OverlayComponentsContainer: React.FC = () => {
         return components.map((component, index) => {
             const props = component.props as React.Attributes & OverlayComponentBase ?? {};
 
-            props.open = visibleIds.includes(component.id);
             props.onClose = (payload: unknown) => closeComponentById(component.id, payload);
 
             const element = createElement(component.component, props);

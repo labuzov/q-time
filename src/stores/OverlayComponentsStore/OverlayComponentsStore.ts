@@ -1,42 +1,23 @@
 import { create } from 'zustand';
 
+import { OverlayComponent, OverlayComponentPayload, OverlayComponentPromise } from './types';
+import { generateOverlayComponentId } from './utils';
 
-const ANIM_DURATION = 250;
-
-export type OverlayComponent = {
-    id: string;
-    component: React.FunctionComponent<unknown>;
-    props: unknown;
-}
-
-type ComponentPromise = {
-    componentId: string;
-    resolve: (value: Payload) => void;
-    reject: (value: Payload) => void;
-}
-
-type Payload = unknown;
 
 type OverlayComponentsState = {
     components: OverlayComponent[];
-    visibleIds: string[];
-    promises: ComponentPromise[];
+    promises: OverlayComponentPromise[];
     showComponent: <P, T>(component: React.FunctionComponent<P>, props?: P) => Promise<T>;
-    closeComponentById: (id: string, payload?: Payload) => void;
-    closeLastComponent: (payload?: Payload) => void;
+    closeComponentById: (id: string, payload?: OverlayComponentPayload) => void;
+    closeLastComponent: (payload?: OverlayComponentPayload) => void;
 }
-
-const generateId = () => {
-    return Math.random().toString(36).substring(2, 8);
-};
 
 export const useOverlayComponentsStore = create<OverlayComponentsState>((set, get) => ({
     components: [],
-    visibleIds: [],
     promises: [],
 
     showComponent: async <P, T>(component: React.FunctionComponent<P>, props?: P) => {
-        const id = generateId();
+        const id = generateOverlayComponentId();
         const overlayComponent: OverlayComponent = {
             id,
             component: component as React.FunctionComponent<unknown>,
@@ -47,34 +28,21 @@ export const useOverlayComponentsStore = create<OverlayComponentsState>((set, ge
             set(state => ({
                 promises: [...state.promises, {
                     componentId: id,
-                    resolve: resolve as (value: Payload) => void,
-                    reject: reject as (value: Payload) => void
+                    resolve: resolve as (value: OverlayComponentPayload) => void,
+                    reject: reject as (value: OverlayComponentPayload) => void
                 }],
                 components: [...state.components, overlayComponent]
             }));
-
-            setTimeout(() => {
-                set(state => ({
-                    visibleIds: [...state.visibleIds, overlayComponent.id]
-                }));
-            }, 0);
         }).finally(() => {
-            const byId = (id: string) => id !== overlayComponent.id;
             const byComponentId = (item: OverlayComponent) => item.id !== overlayComponent.id;
-
-            set(state => ({
-                visibleIds: state.visibleIds.filter(byId)
-            }));
     
-            setTimeout(() => {
-                set(state => ({
-                    components: state.components.filter(byComponentId)
-                }));
-            }, ANIM_DURATION);
+            set(state => ({
+                components: state.components.filter(byComponentId)
+            }));
         });
     },
 
-    closeComponentById: (id: string, payload?: Payload) => {
+    closeComponentById: (id: string, payload?: OverlayComponentPayload) => {
         set(state => {
             const promise = state.promises.find(i => i.componentId === id);
             promise?.resolve(payload);
@@ -85,7 +53,7 @@ export const useOverlayComponentsStore = create<OverlayComponentsState>((set, ge
         });
     },
 
-    closeLastComponent: (payload?: Payload) => {
+    closeLastComponent: (payload?: OverlayComponentPayload) => {
         const { components, closeComponentById } = get();
 
         if (!components.length) return;

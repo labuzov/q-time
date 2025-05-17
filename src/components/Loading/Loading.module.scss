@@ -1,5 +1,5 @@
 .loading {
-    animation: delay 0.4s;
+    // animation: delay 0.4s;
 
     svg {
         width: 48px;
@@ -19,6 +19,9 @@
 
     @keyframes delay {
         0% {
+            opacity: 0;
+        }
+        99% {
             opacity: 0;
         }
         100% {

@@ -1,5 +1,3 @@
-$animDuration: 200ms;
-
 .container {
     position: fixed;
     inset: 0;
@@ -12,26 +10,26 @@ $animDuration: 200ms;
     position: absolute;
     inset: 0;
     background-color: #000;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .modal {
     position: relative;
-    margin: 8px;
-    background-color: var(--color-content-block-bg);
-    border-radius: 8px;
+    margin: 0.5rem;
+    background-color: var(--color-paper-bg);
+    border-radius: 0.75rem;
     width: 100%;
 
     &Header {
         position: relative;
-        padding: 24px;
+        padding: 1.5rem;
         padding-bottom: 0;
-        padding-right: 64px;
+        padding-right: 4rem;
 
         .icon {
             position: absolute;
-            top: 16px;
-            right: 16px;
+            top: 1rem;
+            right: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -55,75 +53,37 @@ $animDuration: 200ms;
     }
 
     &Content {
-        padding: 24px;
+        padding: 1.5rem;
         max-height: 450px;
         overflow: auto;
     }
 
     &Footer {
-        padding: 24px;
+        padding: 1.5rem;
         padding-top: 0;
         border-top: 2px solid var(--color-line-divider);
 
         &Inner {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .left, .right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .right {
             justify-content: flex-end;
+            gap: 0.75rem;
+        }
+
+        button {
+            height: 48px;
         }
     }
 }
 
 .title {
-    font-weight: 500;
-    font-size: 20px;
+    font-weight: 700;
+    font-size: 1.25rem;
     line-height: 1.2;
 }
 
 .loading {
     svg {
         width: 24px;
-    }
-}
-
-.enter {
-    .backdrop,
-    .modal {
-        opacity: 0;
-    }
-}
-.enterActive {
-    .backdrop {
-        opacity: 0.5;
-        transition: $animDuration;
-    }
-    .modal {
-        opacity: 1;
-        transition: $animDuration;
-    }
-}
-.exit {
-    .backdrop {
-        opacity: 0.5;
-    }
-    .modal {
-        opacity: 1;
-    }
-}
-.exitActive {
-    .backdrop,
-    .modal {
-        opacity: 0;
-        transition: $animDuration;
     }
 }

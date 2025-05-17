@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 2rem;
-    padding: 0.5rem 2.5rem;
+    padding: 0 2.5rem;
     height: 55px;
     background-color: var(--color-button-default-bg);
     border: 2px solid var(--color-button-default-bg);
@@ -24,15 +24,10 @@
         pointer-events: none;
     }
 
-    &.variantOutlineSecondary {
-        background-color: var(--color-button-outline-secondary-bg);
-        border-color: var(--color-button-outline-secondary-border);
-        color: var(--color-text);
-
-        &:hover, &:focus-visible {
-            background-color: var(--color-button-outline-secondary-bg-hover);
-            border-color: var(--color-button-outline-secondary-border-hover);
-        }
+    &.variantSecondary {
+        background-color: var(--color-button-secondary-bg);
+        border-color: var(--color-button-secondary-border);
+        color: var(--color-button-secondary-text);
     }
 
     &.variantOutline {

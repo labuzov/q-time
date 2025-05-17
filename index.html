@@ -6,12 +6,78 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- <link rel="icon" type="image/svg+xml" href="/logo.svg" /> -->
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <title>qTime</title>
+    <style>
+      .startScreen {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: delay 0.4s;
+      }
+
+      .startScreen svg {
+        width: 48px;
+        transform-origin: center;
+        animation: rotate4 2s linear infinite;
+      }
+       
+      .startScreen circle {
+        fill: none;
+        stroke: #3b82f6;
+        stroke-width: 3;
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: round;
+        animation: dash4 1.5s ease-in-out infinite;
+      }
+
+      @keyframes delay {
+        0% {
+          opacity: 0;
+        }
+        99% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes rotate4 {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    
+      @keyframes dash4 {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+    
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+    
+        100% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
+      <div class="startScreen">
+        <svg viewBox="25 25 50 50">
+          <circle r="20" cy="50" cx="50" />
+        </svg>
+      </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

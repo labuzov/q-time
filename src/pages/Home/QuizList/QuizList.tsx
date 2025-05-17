@@ -6,10 +6,10 @@ import { Quiz } from '@/@types/quiz';
 
 import { Container } from '@/components/Container';
 import { Typography } from '@/components/Typography';
+import { InViewAnimation } from '@/components/InViewAnimation';
 
 import { QuizItem } from './QuizItem/QuizItem';
 import styles from './QuizList.module.scss';
-import { InViewAnimation } from '@/components/InViewAnimation';
 
 
 export const QuizList: FC = () => {

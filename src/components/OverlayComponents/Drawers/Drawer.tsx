@@ -1,12 +1,9 @@
-import { CSSProperties, PropsWithChildren, useRef } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import { CSSProperties, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 import { OverlayComponentBase } from '../types';
 import styles from './Drawer.module.scss';
 
-
-const ANIM_DURATION = 200;
 
 export type DrawerPosition = 'left' | 'bottom' | 'right';
 
@@ -18,9 +15,7 @@ export type DrawerProps = PropsWithChildren & OverlayComponentBase & {
     onClose?: () => void;
 };
 
-export const Drawer: React.FC<DrawerProps> = ({ open, position, bgClassName, paperClassName, paperStyle, children, onClose }) => {
-    const ref = useRef<HTMLDivElement>(null);
-
+export const Drawer: React.FC<DrawerProps> = ({ position, bgClassName, paperClassName, paperStyle, children, onClose }) => {
     const getPositionClassName = () => {
         switch (position) {
             case 'left': return styles.leftPos;
@@ -35,24 +30,11 @@ export const Drawer: React.FC<DrawerProps> = ({ open, position, bgClassName, pap
     }
 
     return (
-        <CSSTransition
-            in={open}
-            nodeRef={ref}
-            timeout={ANIM_DURATION}
-            unmountOnExit
-            classNames={{
-                enter: styles.enter,
-                enterActive: styles.enterActive,
-                exit: styles.exit,
-                exitActive: styles.exitActive,
-            }}
-        >
-            <div ref={ref} className={classNames(styles.drawer)}>
-                <div className={classNames(styles.bg, bgClassName)} onClick={handleClose} />
-                <div className={classNames(styles.paper, getPositionClassName(), paperClassName)} style={paperStyle}>
-                    {children}
-                </div>
+        <div className={classNames(styles.drawer)}>
+            <div className={classNames(styles.bg, bgClassName)} onClick={handleClose} />
+            <div className={classNames(styles.paper, getPositionClassName(), paperClassName)} style={paperStyle}>
+                {children}
             </div>
-        </CSSTransition>
+        </div>
     );
 }

@@ -21,9 +21,19 @@ export const getScrollbarWidth = () => {
 export const addScrollbarPadding = (width: number) => {
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = width + 'px';
+
+    const header = document.getElementById('header');
+    if (header) {
+        header.style.paddingRight = width + 'px';
+    }
 }
 
 export const removeScrollbarPadding = () => {
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
+    
+    const header = document.getElementById('header');
+    if (header) {
+        header.style.paddingRight = '';
+    }
 }

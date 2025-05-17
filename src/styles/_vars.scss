@@ -9,11 +9,11 @@
     --color-welcome-bg: #fff;
     --color-footer-bg: #fff;
 
-    --color-nav-item: #999;
-    --color-nav-item-hover: #999;
-    --color-nav-item-hover-bg: #f6f6f6;
-    --color-nav-item-active: var(--color-primary);
-    --color-nav-item-active-bg: #EAF1FF;
+    --color-input-bg: transparent;
+    --color-input-bg-disabled: #f2f2f2;
+    --color-input-border: #e6e6e6;
+    --color-input-border-disabled: #dddddd;
+    --color-input-border-hover: #cecece;
 
     --color-paper-bg: #fff;
     --shadow-paper: 0px 0px 8px 0px rgba(0, 0, 0, 0.03);
@@ -22,6 +22,7 @@
     --color-header-border: #c8c8c8;
     --color-header-text: var(--color-text);
     --shadow-header: 0px 0px 8px 0px #eee;
+    --header-height: 60px;
 
     --color-checkbox-bg: transparent;
     --color-checkbox-border: #e4e4e4;
@@ -34,6 +35,13 @@
     --color-button-default-border: var(--color-primary);
     --color-button-default-text: #fff;
 
+    --color-button-secondary-text: #636369;
+    --color-button-secondary-bg: #f1f1f1;
+    --color-button-secondary-border: #f1f1f1;
+
     --color-skeleton-bg-1: #eee;
     --color-skeleton-bg-2: #e6e6e6;
+
+    --color-modal-close-icon-bg: #f1f1f1;
+    --color-modal-close-icon-bg-hover: #f1f1f1;
 }

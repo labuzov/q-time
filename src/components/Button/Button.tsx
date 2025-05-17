@@ -17,7 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
     const classes = classNames(
         styles.button,
         variant === 'outline' && styles.variantOutline,
-        variant === 'outlineSecondary' && styles.variantOutlineSecondary,
+        variant === 'secondary' && styles.variantSecondary,
         variant === 'text' && styles.variantText,
         className
     );

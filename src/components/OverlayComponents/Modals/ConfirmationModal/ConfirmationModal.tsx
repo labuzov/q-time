@@ -1,16 +1,21 @@
-import { ReactNode } from 'react';
-import { ModalProps, ModalButton, Modal } from '../../Modals';
+import { Button } from '@/components/Button';
+import { Typography } from '@/components/Typography';
+
+import { ModalProps, ModalBase } from '../../Modals';
+import { ModalHeader } from '../ModalHeader';
+import { ModalContent } from '../ModalContent';
+import { ModalFooter } from '../ModalFooter';
 
 
 export type ConfirmationModalProps = ModalProps & {
-    message?: string | ReactNode;
+    message?: string;
     cancelButtonText?: string;
     confirmButtonText?: string;
     onConfirm?: () => void;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
-    title, message, cancelButtonText, confirmButtonText, onConfirm, onClose, ...props
+    message, cancelButtonText, confirmButtonText, onConfirm, onClose, ...props
 }) => {
     const handleConfirm = () => {
         onConfirm?.();
@@ -21,29 +26,24 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         onClose?.(false);
     }
 
-    const getButtons = () => {
-        const buttons: ModalButton[] = [];
-
-        const cancelText = cancelButtonText || 'Отмена';
-        const confirmText = confirmButtonText || 'ОК';
-
-        buttons.push({ text: cancelText, variant: 'outlineSecondary', onClick: handleCancel });
-        buttons.push({ text: confirmText, onClick: handleConfirm });
-
-        return buttons;
-    }
-
-    const modalTitle = title || 'Подтверждение';
-    const modalMessage = message || 'Вы действительно хотите продолжить?';
-
     return (
-        <Modal
-            title={modalTitle}
-            buttons={getButtons()}
-            onClose={handleCancel}
-            {...props}
-        >
-            {modalMessage}
-        </Modal>
+        <ModalBase onClose={onClose} {...props}>
+            <ModalHeader
+                onClose={handleCancel}
+            >
+                <Typography textId={'modal.confirmation.title'} />
+            </ModalHeader>
+            <ModalContent>
+                <Typography textId={message ?? 'modal.confirmation.text'} />
+            </ModalContent>
+            <ModalFooter>
+                <Button variant="secondary" onClick={handleCancel}>
+                    <Typography textId={cancelButtonText ?? 'modal.confirmation.cancel'} />
+                </Button>
+                <Button onClick={handleConfirm}>
+                    <Typography textId={confirmButtonText ?? 'modal.confirmation.confirm'} />
+                </Button>
+            </ModalFooter>
+        </ModalBase>
     );
 }

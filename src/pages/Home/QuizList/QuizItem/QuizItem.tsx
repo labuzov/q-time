@@ -18,7 +18,7 @@ export const QuizItem: FC<Props> = ({ quiz }) => {
     const { id, title, description, image } = quiz;
 
     return (
-        <InViewAnimation className={styles.wrapper} variant="opacity" delay={0.2}>
+        <InViewAnimation className={styles.wrapper} variant="translateTop">
             <Link to={ROUTES.quiz.get(id)}>
                 <div className={styles.image}>
                     <Image src={image} />

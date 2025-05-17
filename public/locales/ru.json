@@ -1,6 +1,8 @@
 {
+    "header.button.login": "Войти",
+
     "home.welcome.text.primary": "Онлайн-квизы",
-    "home.welcome.text.secondary": "Квизы онлайн",
+    "home.welcome.text.secondary": "Разнообразные викторины на любые темы",
     "home.welcome.button": "Создать квиз",
     "home.quiz.list.text": "Доступные квизы",
 
@@ -10,9 +12,16 @@
     "quiz.current.question": "Вопрос {{questionNumber}}/{{questionCount}}",
     "quiz.result.text": "Вы ответили правильно на {{correct}} из {{count}} вопросов",
 
+    "modal.confirmation.title": "Подтверждение",
+    "modal.confirmation.text": "Вы действительно хотите продолжить?",
+    "modal.confirmation.cancel": "Отмена",
+    "modal.confirmation.confirm": "Ок",
+
     "error.default.text": "Ошибка",
     "error.default.description": "Что-то пошло не так. Уже работаем над этим",
     "error.404.text": "Страница не найдена",
     "error.404.description": "Запрашиваемый вами ресурс не существует или был удален",
-    "error.button.goHome": "Вернуться на главную"
+    "error.button.goHome": "Вернуться на главную",
+
+    "validation.invalid": "Некорректное значение"
 }

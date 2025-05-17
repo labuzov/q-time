@@ -1,6 +1,5 @@
-import { FC, PropsWithChildren, useEffect } from 'react';
-import { motion, useAnimation, Variants } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { FC, PropsWithChildren } from 'react';
+import { HTMLMotionProps, motion, Variants } from 'framer-motion';
 
 
 const variants: Variants = {
@@ -8,31 +7,22 @@ const variants: Variants = {
     scaleHidden: { opacity: 0, scale: 0 },
     opacityVisible: { opacity: 1 },
     opacityHidden: { opacity: 0 },
-    translateLeftVisible: { opacity: 1, translateX: 0 },
-    translateLeftHidden: { opacity: 0, translateX: 50 },
-    translateTopVisible: { opacity: 1, translateY: 0 },
-    translateTopHidden: { opacity: 0, translateY: 50 },
+    translateLeftVisible: { opacity: 1, x: 0 },
+    translateLeftHidden: { opacity: 0, x: 50 },
+    translateTopVisible: { opacity: 1, y: 0 },
+    translateTopHidden: { opacity: 0, y: 50 },
 }
 
 type AnimationVariant = 'scale' | 'opacity' | 'translateLeft' | 'translateTop';
 
-type Props = PropsWithChildren & {
+type Props = PropsWithChildren & HTMLMotionProps<"div"> & {
     variant: AnimationVariant;
     duration?: number;
     delay?: number;
     className?: string;
 }
 
-export const InViewAnimation: FC<Props> = ({ variant, duration, delay, className, children }) => {
-    const control = useAnimation();
-    const [ref, inView] = useInView();
-
-    useEffect(() => {
-        if (inView) {
-            control.start(getVisibleName());
-        } 
-    }, [control, inView]);
-
+export const InViewAnimation: FC<Props> = ({ variant, duration, delay, className, children, ...props }) => {
     const getVisibleName = () => {
         return variant + 'Visible';
     }
@@ -43,12 +33,13 @@ export const InViewAnimation: FC<Props> = ({ variant, duration, delay, className
     
     return (
         <motion.div
-            ref={ref}
-            animate={control}
             variants={variants}
             className={className}
             initial={getHiddenName()}
+            whileInView={getVisibleName()}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ delay: delay ?? 0, duration: duration ?? 0.5 }}
+            {...props}
         >
             {children}
         </motion.div>

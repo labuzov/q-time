@@ -1,5 +1,7 @@
+import { OverlayComponentPayload } from '@/stores/OverlayComponentsStore';
+
+
 export type OverlayComponentBase = {
-    open?: boolean;
-    onClose?: (payload?: unknown) => void;
+    onClose?: (payload?: OverlayComponentPayload) => void;
     onKeyDown?: (event: KeyboardEvent) => void;
 }
