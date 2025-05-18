@@ -8,7 +8,6 @@ import { Image } from '@/components/Image';
 import { Button } from '@/components/Button';
 
 import { InViewAnimation } from '@/components/InViewAnimation';
-import { ConfirmationModal } from '@/components/OverlayComponents/Modals/ConfirmationModal';
 import { useOverlayComponentsStore } from '@/stores/OverlayComponentsStore';
 import styles from './Welcome.module.scss';
 import { AuthModal } from '@/components/OverlayComponents/Modals/AuthModal';

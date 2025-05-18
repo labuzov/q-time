@@ -6,7 +6,7 @@ import styles from './Button.module.scss';
 import { ButtonVariant } from './types';
 
 
-type ButtonProps = PropsWithChildren & ComponentProps<'button'> & {
+export type ButtonProps = PropsWithChildren & ComponentProps<'button'> & {
     variant?: ButtonVariant;
 };
 
@@ -16,9 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
 
     const classes = classNames(
         styles.button,
-        variant === 'outline' && styles.variantOutline,
-        variant === 'secondary' && styles.variantSecondary,
-        variant === 'text' && styles.variantText,
+        variant && styles[variant],
         className
     );
 

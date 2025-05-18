@@ -17,14 +17,13 @@
     position: relative;
     margin: 0.5rem;
     background-color: var(--color-paper-bg);
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     width: 100%;
 
     &Header {
         position: relative;
         padding: 1.5rem;
         padding-bottom: 0;
-        padding-right: 4rem;
 
         .icon {
             position: absolute;
@@ -54,7 +53,6 @@
 
     &Content {
         padding: 1.5rem;
-        max-height: 450px;
         overflow: auto;
     }
 

@@ -1,11 +1,13 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
-import styles from './Header.module.scss';
 import { Image } from '@/components/Image';
 import { Typography } from '@/components/Typography';
 import { Container } from '@/components/Container';
 import { Breakpoints } from '@/constants/screen';
 import { Button } from '@/components/Button';
+
+import styles from './Header.module.scss';
 
 
 export const Header: FC = () => {
@@ -13,10 +15,10 @@ export const Header: FC = () => {
         <header id="header" className={styles.header}>
             <Container className={styles.container} maxWidth={Breakpoints.XL}>
                 <div className={styles.left}>
-                    <div className={styles.logo}>
+                    <Link to="/" className={styles.logo}>
                         <Image src='/logo.svg' />
                         <Typography>qTime</Typography>
-                    </div>
+                    </Link>
                 </div>
                 <div className={styles.right}>
                     <Button>

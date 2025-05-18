@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.prompt {
+    margin-right: 0.25rem;
+}
+
+.action {
+    color: var(--color-primary);
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
