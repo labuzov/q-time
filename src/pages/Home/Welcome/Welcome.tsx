@@ -8,17 +8,10 @@ import { Image } from '@/components/Image';
 import { Button } from '@/components/Button';
 
 import { InViewAnimation } from '@/components/InViewAnimation';
-import { useOverlayComponentsStore } from '@/stores/OverlayComponentsStore';
 import styles from './Welcome.module.scss';
-import { AuthModal } from '@/components/OverlayComponents/Modals/AuthModal';
 
 
 export const Welcome: FC = () => {
-    const { showComponent } = useOverlayComponentsStore();
-
-    const handleCreateClick = () => {
-        showComponent(AuthModal)
-    }
 
     return ( 
         <div className={styles.wrapper}>
@@ -38,7 +31,6 @@ export const Welcome: FC = () => {
                     <InViewAnimation variant="translateTop" delay={0.6}>
                         <Button
                             className={styles.button}
-                            onClick={handleCreateClick}
                         >
                             <Typography
                                 textId="home.welcome.button"

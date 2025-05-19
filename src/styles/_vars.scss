@@ -14,6 +14,7 @@
     --color-input-border: #e6e6e6;
     --color-input-border-disabled: #dddddd;
     --color-input-border-hover: #cecece;
+    --color-input-placeholder: #ccc;
 
     --color-paper-bg: #fff;
     --shadow-paper: 0px 0px 8px 0px rgba(0, 0, 0, 0.03);
@@ -51,4 +52,17 @@
     --color-modal-close-icon-bg-hover: #f1f1f1;
 
     --color-auth-provider-border: #999;
+
+    --color-alert-error-bg: rgb(253, 237, 237);
+    --color-alert-error-text: rgb(95, 33, 32);
+    --color-alert-error-icon: #d32f2f;
+    --color-alert-info-bg: rgb(229, 246, 253);
+    --color-alert-info-text: rgb(1, 67, 97);
+    --color-alert-info-icon: #0288d1;
+    --color-alert-success-bg: rgb(237, 247, 237);
+    --color-alert-success-text: rgb(30, 70, 32);
+    --color-alert-success-icon: #2e7d32;
+    --color-alert-warning-bg: rgb(255, 244, 229);
+    --color-alert-warning-text: rgb(102, 60, 0);
+    --color-alert-warning-icon: #ed6c02;
 }

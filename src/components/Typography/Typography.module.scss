@@ -56,10 +56,6 @@
 
 .h5 {
     font-size: 1.25rem;
-
-    @include shared.bp-s {
-        font-size: 1rem;
-    }
 }
 
 .caption {

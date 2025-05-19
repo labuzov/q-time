@@ -14,3 +14,18 @@
         width: 100%;
     }
 }
+
+.resetPassword {
+    display: flex;
+    justify-content: flex-end;
+
+    &Text {
+        width: fit-content;
+        color: var(--color-primary);
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

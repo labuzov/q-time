@@ -16,13 +16,37 @@
     "modal.confirmation.text": "Вы действительно хотите продолжить?",
     "modal.confirmation.cancel": "Отмена",
     "modal.confirmation.confirm": "Ок",
+
     "modal.auth.login.title": "Вход в аккаунт",
     "modal.auth.login.subtitle": "Войдите в аккаунт, чтобы продолжить",
     "modal.auth.login.email": "Email",
+    "modal.auth.login.email.placeholder": "Введите ваш Email",
     "modal.auth.login.password": "Пароль",
+    "modal.auth.login.password.placeholder": "Введите ваш пароль",
     "modal.auth.login.button": "Войти",
     "modal.auth.login.prompt.text": "Еще нет аккаунта?",
     "modal.auth.login.prompt.action": "Зарегистрироваться",
+
+    "modal.auth.registration.title": "Создать аккаунт",
+    "modal.auth.registration.subtitle": "Создайте аккаунт, чтобы продолжить",
+    "modal.auth.registration.email": "Email",
+    "modal.auth.registration.email.placeholder": "Введите ваш Email",
+    "modal.auth.registration.password": "Пароль",
+    "modal.auth.registration.password.placeholder": "Введите ваш пароль",
+    "modal.auth.registration.button": "Зарегистрироваться",
+    "modal.auth.registration.prompt.text": "Уже есть аккаунт?",
+    "modal.auth.registration.prompt.action": "Войти",
+
+    "modal.auth.reset.title": "Забыли пароль?",
+    "modal.auth.reset.subtitle": "Не беспокойтесь, мы вышлем инструкцию на ваш Email",
+    "modal.auth.reset.email": "Email",
+    "modal.auth.reset.email.placeholder": "Введите ваш Email",
+    "modal.auth.reset.button": "Отправить",
+    "modal.auth.reset.prompt.text": "Вернуться ко",
+    "modal.auth.reset.prompt.action": "входу в аккаунт",
+
+    "modal.auth.reset.password": "Забыли пароль?",
+    "modal.auth.reset.password.success": "Письмо с инструкцией отправлено на вашу почту",
     "modal.auth.google": "Продолжить с Google",
 
     "error.default.text": "Ошибка",
@@ -31,5 +55,14 @@
     "error.404.description": "Запрашиваемый вами ресурс не существует или был удален",
     "error.button.goHome": "Вернуться на главную",
 
-    "validation.invalid": "Некорректное значение"
+    "validation.invalid": "Некорректное значение",
+    "validation.required": "Обязательное поле",
+    "validation.email": "Некорректный Email",
+    "validation.minLength": "Минимальное кол-во символов - {{value}}",
+    "validation.maxLength": "Максимальное кол-во символов - {{value}}",
+
+    "auth/operation-not-allowed": "Данная операция запрещена",
+    "auth/invalid-email": "Некорректный Email",
+    "auth/invalid-credential": "Неверный логин или пароль",
+    "auth/weak-password": "Слабый пароль"
 }
