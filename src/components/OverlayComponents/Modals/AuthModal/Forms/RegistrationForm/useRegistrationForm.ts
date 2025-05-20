@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useForm } from '@/hooks/useForm';
 import { getValidationText, Validation } from '@/utils/validation';
 
-const validationSchema = Yup.object().shape({
+const getValidationSchema = () => Yup.object().shape({
     email: Yup.string()
         .required(getValidationText(Validation.Required))
         .email(getValidationText(Validation.Email)),
@@ -13,7 +13,8 @@ const validationSchema = Yup.object().shape({
         .max(32, getValidationText(Validation.MaxLength, { value: 30 }))
 });
 
-type FormValues = Yup.InferType<typeof validationSchema>;
+type Schema = ReturnType<typeof getValidationSchema>
+type FormValues = Yup.InferType<Schema>;
 
 const initialValues: FormValues = {
     email: '',
@@ -24,7 +25,7 @@ export const useRegistrationForm = () => {
     const {
         values, isValid, errors,
         setFieldValue, validate
-    } = useForm({ initialValues, validationSchema });
+    } = useForm({ initialValues, validationSchema: getValidationSchema() });
 
     return {
         values,

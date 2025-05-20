@@ -16,8 +16,8 @@ export const AuthModal: React.FC<Props> = ({
 }) => {
     const {
         currentForm, operationStatus, isLoading,
-        changeCurrentForm, loginWithEmail, loginWithGoogle, registerWithEmail,
-        sendPasswordResetEmail
+        changeCurrentForm, loginWithEmail, loginWithGoogle,
+        registerWithEmail, sendPasswordResetEmail
     } = useAuthModal(handleAuth);
 
     function handleCancel() {

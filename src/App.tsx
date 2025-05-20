@@ -1,17 +1,14 @@
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useShallow } from 'zustand/shallow';
-import { onAuthStateChanged } from 'firebase/auth';
-
-import { useAuthStore } from '@/stores/AuthStore';
 import { ROUTES } from '@/constants/routes';
 
 import { OverlayComponentsContainer } from '@/components/OverlayComponents/OverlayComponentsContainer';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Loading } from '@/components/Loading';
 import { NotFoundPage } from '@/pages/Errors/404NotFoundPage';
+import { useI18nInit } from '@/hooks/initialization/useI18nInit';
+import { useAuthInit } from '@/hooks/initialization/useAuthInit';
 
-import { firebaseAuth } from './firebaseConfig';
 import { Layout } from './components/Layout';
 import './styles/App.scss';
 
@@ -19,22 +16,10 @@ const HomePage = lazy(() => import('@/pages/Home/HomePage'));
 const QuizPage = lazy(() => import('@/pages/Quiz/QuizPage'));
 
 const App = () => {
-    const { isInit, handleAuthStateChanged } = useAuthStore(useShallow(({
-        isInit, handleAuthStateChanged
-    }) => ({
-        isInit, handleAuthStateChanged
-    })));
+    const { isAuthInit } = useAuthInit();
+    const { isI18nInit } = useI18nInit();
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(firebaseAuth, handleAuthStateChanged);
-
-        return () => {
-            unsubscribe();
-        };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const isAppInit = isInit;
+    const isAppInit = isAuthInit && isI18nInit;
 
     return (
         <ErrorBoundary>

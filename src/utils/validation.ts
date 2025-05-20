@@ -14,5 +14,6 @@ export const enum Validation {
 type Options = TOptions;
 
 export const getValidationText = (text: Validation, options?: Options) => {
+    console.log(i18n.isInitialized, i18n.t(text, options))
     return i18n.t(text, options);
 }
