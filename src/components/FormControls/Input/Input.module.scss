@@ -26,7 +26,6 @@
 		border-color: var(--color-input-border-hover);
     }
 	
-	&:invalid,
 	&.invalid {
 		border-color: var(--color-error);
 	}

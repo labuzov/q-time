@@ -10,7 +10,7 @@ type FormOptions<T> = {
 }
 
 export const useForm = <T extends FormikValues>({ initialValues, validationSchema }: FormOptions<T>) => {
-    const { values, errors, isValid, validateForm, setFieldValue: setValue, setFieldError } = useFormik<T>({
+    const { values, errors, isValid, validateForm, setFieldValue: setValue, setValues, setFieldError } = useFormik<T>({
         initialValues,
         validationSchema,
         validateOnChange: false,
@@ -35,6 +35,7 @@ export const useForm = <T extends FormikValues>({ initialValues, validationSchem
         errors,
         isValid,
         setFieldValue,
+        setValues,
         validate
     };
 }

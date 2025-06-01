@@ -1,0 +1,33 @@
+@use "/src/styles/shared" as shared;
+
+.content {
+    padding-top: calc(var(--header-height) + 2rem);
+}
+
+.header {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.forms {
+    display: flex;
+    gap: 2rem;
+
+    @include shared.bp-l {
+        flex-direction: column;
+
+        .options, .questions {
+            width: 100%;
+        }
+    }
+}
+
+.options {
+    width: 40%;
+}
+
+.questions {
+    width: 60%;
+}

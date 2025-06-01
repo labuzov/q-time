@@ -8,12 +8,15 @@ export const enum Validation {
     Required = 'validation.required',
     Email = 'validation.email',
     MinLength = 'validation.minLength',
-    MaxLength = 'validation.maxLength'
+    MaxLength = 'validation.maxLength',
+    MinArrayLength = 'validation.minArrayLength',
+    MaxArrayLength = 'validation.maxArrayLength',
+    MinQuestionsLength = 'validation.minQuestionsLength',
+    MaxQuestionsLength = 'validation.maxQuestionsLength',
 }
 
 type Options = TOptions;
 
 export const getValidationText = (text: Validation, options?: Options) => {
-    console.log(i18n.isInitialized, i18n.t(text, options))
     return i18n.t(text, options);
 }

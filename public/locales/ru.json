@@ -1,5 +1,6 @@
 {
     "header.button.login": "Войти",
+    "header.button.myQuizzes": "Мои квизы",
 
     "home.welcome.text.primary": "Онлайн-квизы",
     "home.welcome.text.secondary": "Разнообразные викторины на любые темы",
@@ -49,6 +50,31 @@
     "modal.auth.reset.password.success": "Письмо с инструкцией отправлено на вашу почту",
     "modal.auth.google": "Продолжить с Google",
 
+    "modal.quiz.question.title.edit": "Редактировать вопрос",
+    "modal.quiz.question.title.new": "Добавить вопрос",
+    "modal.quiz.question.fields.title": "Вопрос",
+    "modal.quiz.question.fields.title.placeholder": "Введите текст вопроса",
+    "modal.quiz.question.fields.answer": "Ответы",
+    "modal.quiz.question.fields.answer.placeholder": "Введите ответ",
+    "modal.quiz.question.button.add": "+ Добавить ответ",
+    "modal.quiz.question.button.cancel": "Отмена",
+    "modal.quiz.question.button.submit": "Сохранить",
+
+    "editor.title.new": "Новый квиз",
+    "editor.title.edit": "Редактирование квиза",
+    "editor.options.title": "Параметры",
+    "editor.options.fields.title": "Название",
+    "editor.options.fields.title.placeholder": "Введите название",
+    "editor.options.fields.description": "Описание",
+    "editor.options.fields.description.placeholder": "Введите описание",
+    "editor.options.fields.imageUrl": "Фото",
+    "editor.options.fields.imageUrl.placeholder": "Введите сссылку на фото",
+
+    "editor.questions.title": "Вопросы",
+
+    "editor.button.save": "Сохранить",
+    "editor.button.addQuestion": "Добавить вопрос",
+
     "error.default.text": "Ошибка",
     "error.default.description": "Что-то пошло не так. Уже работаем над этим",
     "error.404.text": "Страница не найдена",
@@ -58,11 +84,19 @@
     "validation.invalid": "Некорректное значение",
     "validation.required": "Обязательное поле",
     "validation.email": "Некорректный Email",
+    "validation.minArrayLength": "Минимальное количество - {{value}}",
+    "validation.maxArrayLength": "Максимальное количество - {{value}}",
     "validation.minLength": "Минимальное кол-во символов - {{value}}",
     "validation.maxLength": "Максимальное кол-во символов - {{value}}",
+    "validation.minQuestionsLength": "Минимальное кол-во вопросов - {{value}}",
+    "validation.maxQuestionsLength": "Максимальное кол-во вопросов - {{value}}",
 
     "auth/operation-not-allowed": "Данная операция запрещена",
     "auth/invalid-email": "Некорректный Email",
     "auth/invalid-credential": "Неверный логин или пароль",
-    "auth/weak-password": "Слабый пароль"
+    "auth/weak-password": "Слабый пароль",
+    "auth/popup-closed-by-user": "Окно входа было закрыто",
+    "auth/too-many-requests": "Слишком много запросов. Попробуйте позже",
+    "auth/network-request-failed": "Проблема с интернет-соединением",
+    "auth/internal-error": "Неопознанная ошибка"
 }

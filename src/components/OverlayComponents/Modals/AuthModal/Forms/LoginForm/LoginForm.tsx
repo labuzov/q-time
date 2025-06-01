@@ -54,7 +54,7 @@ export const LoginForm: React.FC<Props> = ({
                     <Input
                         type="email"
                         value={values.email}
-                        invalid={!!errors.email}
+                        isInvalid={!!errors.email}
                         placeholder="modal.auth.login.email.placeholder"
                         onChange={e => setFieldValue('email', e.currentTarget.value)}
                     />
@@ -69,7 +69,7 @@ export const LoginForm: React.FC<Props> = ({
                     <Input
                         type="password"
                         value={values.password}
-                        invalid={!!errors.password}
+                        isInvalid={!!errors.password}
                         placeholder="modal.auth.login.password.placeholder"
                         onChange={e => setFieldValue('password', e.currentTarget.value)}
                     />

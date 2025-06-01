@@ -1,0 +1,21 @@
+@use "/src/styles/shared" as shared;
+
+.options {
+    width: 100%;
+}
+
+.paper {
+    padding: 2rem;
+    background-color: var(--color-paper-bg);
+    box-shadow: var(--shadow-paper);
+    border-radius: 1rem;
+
+    @include shared.bp-l {
+        padding: 1.5rem;
+    }
+}
+
+.title {
+    margin-bottom: 2rem;
+    font-weight: 700;
+}

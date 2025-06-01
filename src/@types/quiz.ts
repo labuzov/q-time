@@ -15,3 +15,12 @@ export type Question = {
         isCorrect: boolean;
     }[]
 }
+
+export type QuizDto = Omit<Quiz, 'id'> & {
+    id?: string;
+}
+
+export type QuestionDto = Omit<Question, 'id'> & {
+    id?: string;
+    isEdited?: boolean;
+}

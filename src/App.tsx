@@ -14,6 +14,7 @@ import './styles/App.scss';
 
 const HomePage = lazy(() => import('@/pages/Home/HomePage'));
 const QuizPage = lazy(() => import('@/pages/Quiz/QuizPage'));
+const QuizEditorPage = lazy(() => import('@/pages/QuizEditor/QuizEditorPage'));
 
 const App = () => {
     const { isAuthInit } = useAuthInit();
@@ -32,6 +33,7 @@ const App = () => {
                             <Route path="/" element={<HomePage />} />
 
                             <Route path={ROUTES.quiz.path} element={<QuizPage />} />
+                            <Route path={ROUTES.quizEditor.path} element={<QuizEditorPage />} />
 
                             <Route path="*" element={<NotFoundPage />} />
                         </Routes>

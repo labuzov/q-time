@@ -9,9 +9,9 @@ import { ResetPasswordForm } from './Forms/ResetPasswordForm/ResetPasswordForm';
 import styles from './AuthModal.module.scss';
 
 
-type Props = ModalProps
+export type AuthModalProps = ModalProps;
 
-export const AuthModal: React.FC<Props> = ({
+export const AuthModal: React.FC<AuthModalProps> = ({
     onClose, ...props
 }) => {
     const {

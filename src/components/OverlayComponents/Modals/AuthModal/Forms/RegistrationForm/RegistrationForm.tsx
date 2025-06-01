@@ -51,7 +51,7 @@ export const RegistrationForm: React.FC<Props> = ({
                 <FeedbackWrapper errors={errors.email}>
                     <Input
                         value={values.email}
-                        invalid={!!errors.email}
+                        isInvalid={!!errors.email}
                         placeholder="modal.auth.registration.email.placeholder"
                         onChange={e => setFieldValue('email', e.currentTarget.value)}
                     />
@@ -66,7 +66,7 @@ export const RegistrationForm: React.FC<Props> = ({
                     <Input
                         type="password"
                         value={values.password}
-                        invalid={!!errors.password}
+                        isInvalid={!!errors.password}
                         placeholder="modal.auth.registration.password.placeholder"
                         onChange={e => setFieldValue('password', e.currentTarget.value)}
                     />

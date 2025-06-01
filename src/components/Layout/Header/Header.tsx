@@ -1,9 +1,11 @@
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useShallow } from 'zustand/shallow';
+import { MdLogout } from 'react-icons/md';
 
 import { useAuthStore } from '@/stores/AuthStore';
 import { useOverlayComponentsStore } from '@/stores/OverlayComponentsStore';
+import { ROUTES } from '@/constants/routes';
 
 import { Image } from '@/components/Image';
 import { Typography } from '@/components/Typography';
@@ -29,8 +31,14 @@ export const Header: FC = () => {
 
     const { showComponent } = useOverlayComponentsStore();
 
+    const navigate = useNavigate();
+
     const handleAuthClick = () => {
         showComponent(AuthModal);
+    }
+
+    const handleMyQuizzesClick = () => {
+        navigate(ROUTES.myQuizzes.get());
     }
 
     return (
@@ -44,7 +52,19 @@ export const Header: FC = () => {
                 </div>
                 <div className={styles.right}>
                     {!!user ? (
-                        <div className="" onClick={logout}>logout</div>
+                        <>
+                            <Button onClick={handleMyQuizzesClick}>
+                                <Typography textId="header.button.myQuizzes" />
+                            </Button>
+
+                            <Button
+                                className={styles.logout}
+                                variant="secondary"
+                                onClick={logout}
+                            >
+                                <MdLogout />
+                            </Button>
+                        </>
                     ) : (
                         <Button onClick={handleAuthClick}>
                             <Typography textId="header.button.login" />

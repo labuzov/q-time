@@ -6,10 +6,10 @@ import styles from './Input.module.scss';
 
 
 export type InputProps = ComponentProps<'input'> & {
-	invalid?: boolean;
+	isInvalid?: boolean;
 };
 
-export const Input: FC<InputProps> = ({ className, invalid, placeholder, ...props }) => {
+export const Input: FC<InputProps> = ({ className, isInvalid, placeholder, ...props }) => {
 	const { t } = useTranslation();
 
 	return (
@@ -18,7 +18,7 @@ export const Input: FC<InputProps> = ({ className, invalid, placeholder, ...prop
 			placeholder={placeholder ? t(placeholder) : ''}
 			className={classNames(
 				styles.input,
-				invalid && styles.invalid,
+				isInvalid && styles.invalid,
 				className
 			)}
 		/>

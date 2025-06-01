@@ -1,8 +1,4 @@
-import { FC, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
-import { useQuizStore } from '@/stores/QuizStore';
-import { useLoading } from '@/hooks/useLoading';
+import { FC } from 'react';
 
 import { Loading } from '@/components/Loading';
 
@@ -10,24 +6,11 @@ import { Preview } from './Preview/Preview';
 import { Quiz } from './Quiz/Quiz';
 import { Result } from './Result/Result';
 import { ErrorPage } from '../Errors/ErrorPage';
+import { useQuizPage } from './useQuizPage';
 
 
 const QuizPage: FC = () => {
-    const store = useQuizStore();
-
-    const { id: quizId } = useParams<{ id: string }>();
-
-    const { isLoading, isCompletedOnce, addToLoading } = useLoading();
-
-    useEffect(() => {
-        init();
-    }, [quizId]);
-
-    const init = () => {
-        if (!quizId) return;
-
-        addToLoading(() => store.initQuiz(quizId));
-    }
+    const { store, isLoading, isCompletedOnce } = useQuizPage();
 
     const renderContent = () => {
         const {

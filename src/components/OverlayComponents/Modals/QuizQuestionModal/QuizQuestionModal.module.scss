@@ -1,0 +1,56 @@
+.question {
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: var(--color-paper-bg);
+    box-shadow: var(--shadow-paper);
+    border-radius: 1rem;
+}
+
+.answers {
+    margin: 1rem 0;
+
+    &Actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+}
+
+.answersItem {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    
+    &Number {
+        flex-shrink: 0;
+        width: 25px;
+    }
+    
+    &Field {
+        width: 100%;
+    }
+    
+    &ActionsItem {
+        padding: 0;
+        margin-left: 1rem;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        font-size: 16px;
+        flex-shrink: 0;
+
+        &.correct {
+            color: rgb(42, 146, 42);
+            border-color: rgba(67, 196, 67, 0);
+            background-color: rgba(67, 196, 67, 0.15);
+        }
+    }
+
+    &Actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

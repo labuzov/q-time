@@ -49,7 +49,7 @@ export const ResetPasswordForm: React.FC<Props> = ({
                 <FeedbackWrapper errors={errors.email}>
                     <Input
                         value={values.email}
-                        invalid={!!errors.email}
+                        isInvalid={!!errors.email}
                         placeholder="modal.auth.reset.email.placeholder"
                         onChange={e => setFieldValue('email', e.currentTarget.value)}
                     />

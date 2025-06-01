@@ -1,7 +1,8 @@
-import { collection, doc, DocumentSnapshot, FirestoreError, getDoc, getDocs } from 'firebase/firestore';
+import { addDoc, collection, doc, DocumentSnapshot, FirestoreError, getDoc, getDocs, UpdateData, updateDoc, writeBatch } from 'firebase/firestore';
 
 import { firebaseFirestore } from '@/firebaseConfig';
 import { logError } from '@/utils/logging';
+import { getRandomId } from '@/utils/random';
 
 
 type FirebaseData<T> = T & {
@@ -38,6 +39,57 @@ export const firebaseApi = {
             handleError(error);
         }
     },
+
+    createDoc: async (path: string, document: UpdateData<unknown>) => {
+        try {
+            const snapshot = await addDoc(collection(firebaseFirestore, path), document);
+            
+            return snapshot.id;
+        } catch (error: unknown) {
+            handleError(error);
+        }
+    },
+
+    updateDoc: async (path: string, document: UpdateData<unknown>) => {
+        try {
+            await updateDoc(doc(firebaseFirestore, path), document);
+        } catch (error: unknown) {
+            handleError(error);
+        }
+    },
+
+    addDocs: async (path: string, documents: UpdateData<unknown>[]) => {
+        try {
+            const batch = writeBatch(firebaseFirestore);
+
+            for (let i = 0; i < documents.length; i++) {
+                const document = documents[i];
+                const docId = getRandomId(12);
+
+                batch.set(doc(firebaseFirestore, `${path}/${docId}`), document);
+            }
+
+            await batch.commit();
+        } catch (error: unknown) {
+            handleError(error);
+        }
+    },
+
+    clearDocs: async (path: string) => {
+        try {
+            const { docs } = await getDocs(collection(firebaseFirestore, path));
+
+            const batch = writeBatch(firebaseFirestore);
+
+            for (const doc of docs) {
+                batch.delete(doc.ref);
+            }
+
+            await batch.commit();
+        } catch (error: unknown) {
+            handleError(error);
+        }
+    }
 }
 
 const getDocumentData = <T>(docSnapshot: DocumentSnapshot) => {

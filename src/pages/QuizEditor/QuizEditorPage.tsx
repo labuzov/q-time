@@ -1,0 +1,84 @@
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Container } from '@/components/Container';
+import { Breakpoints } from '@/constants/screen';
+import { Loading } from '@/components/Loading';
+import { Typography } from '@/components/Typography';
+import { Button } from '@/components/Button';
+
+import styles from './QuizEditorPage.module.scss';
+import { useQuizEditorPage } from './useQuizEditorPage';
+import { QuizQuestions } from './Questions/QuizQuestions';
+import { QuizOptions } from './QuizOptions/QuizOptions';
+
+
+const QuizEditorPage: FC = () => {
+    const {
+        values, errors, isValid, isLoading, isCompletedOnce, isNew,
+        setFieldValue, validate, addQuestion, editQuestion, removeQuestion, submit
+    } = useQuizEditorPage();
+
+    const navigate = useNavigate();
+
+    const handleSubmit = async () => {
+        if (!await (validate())) return;
+
+        await submit();
+        navigate('/');
+    }
+
+    if (!isCompletedOnce) return (
+        <Loading fillContainer />
+    );
+
+    return (
+        <Container maxWidth={Breakpoints.XL}>
+            <div className={styles.content}>
+                <div className={styles.header}>
+                    <div className={styles.info}>
+                        <Typography
+                            textId={isNew ? 'editor.title.new' : 'editor.title.edit'}
+                            variant="h3"
+                        />
+                    </div>
+
+                    <div className={styles.actions}>
+                        <Button
+                            disabled={isLoading || !isValid}
+                            onClick={handleSubmit}
+                        >
+                            <Typography textId="editor.button.save" />
+                        </Button>
+                    </div>
+                </div>
+
+                <div className={styles.forms}>
+                    <div className={styles.options}>
+                        <QuizOptions
+                            title={values.title}
+                            titleError={errors.title}
+                            description={values.description}
+                            descriptionError={errors.description}
+                            imageUrl={values.imageUrl ?? ''}
+                            imageUrlError={errors.imageUrl}
+                            onTitleChange={v => setFieldValue('title', v)}
+                            onDescriptionChange={v => setFieldValue('description', v)}
+                            onImageUrlChange={v => setFieldValue('imageUrl', v)}
+                        />
+                    </div>
+                    <div className={styles.questions}>
+                        <QuizQuestions
+                            questions={values.questions ?? []}
+                            onAdd={addQuestion}
+                            onEdit={editQuestion}
+                            onRemove={removeQuestion}
+                        />
+                    </div>
+                </div>
+            </div>
+        </Container>
+    );
+}
+
+export default QuizEditorPage;
