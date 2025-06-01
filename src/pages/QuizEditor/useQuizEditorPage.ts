@@ -8,25 +8,23 @@ import { useForm } from '@/hooks/useForm';
 import { quizApi } from '@/api/quizApi';
 import { QuestionDto, QuizDto } from '@/@types/quiz';
 import { firebaseAuth } from '@/firebaseConfig';
+import { FORM_CONFIG } from '@/constants/formConfig';
 
-
-const minQuestionsCount = 1;
-const maxQuestionsLength = 20;
 
 const getValidationSchema = () => Yup.object().shape({
     title: Yup.string()
         .required(getValidationText(Validation.Required))
-        .min(10, getValidationText(Validation.MinLength, { value: 10 }))
-        .max(60, getValidationText(Validation.MaxLength, { value: 60 })),
+        .min(FORM_CONFIG.quiz.title.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.quiz.title.min }))
+        .max(FORM_CONFIG.quiz.title.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.title.max })),
     description: Yup.string()
         .required(getValidationText(Validation.Required))
-        .min(10, getValidationText(Validation.MinLength, { value: 10 }))
-        .max(100, getValidationText(Validation.MaxLength, { value: 100 })),
+        .min(FORM_CONFIG.quiz.description.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.quiz.description.min }))
+        .max(FORM_CONFIG.quiz.description.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.description.max })),
     imageUrl: Yup.string()
-        .max(500, getValidationText(Validation.MaxLength, { value: 500 })),
+        .max(FORM_CONFIG.quiz.imageUrl.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.imageUrl.max })),
     questions: Yup.array<QuestionDto, QuestionDto>()
-        .min(minQuestionsCount, getValidationText(Validation.MinQuestionsLength, { value: minQuestionsCount }))
-        .max(maxQuestionsLength, getValidationText(Validation.MaxQuestionsLength, { value: maxQuestionsLength }))
+        .min(FORM_CONFIG.questions.minCount, getValidationText(Validation.MinQuestionsLength, { value: FORM_CONFIG.questions.minCount }))
+        .max(FORM_CONFIG.questions.maxCount, getValidationText(Validation.MaxQuestionsLength, { value: FORM_CONFIG.questions.maxCount }))
 });
 
 type Schema = ReturnType<typeof getValidationSchema>

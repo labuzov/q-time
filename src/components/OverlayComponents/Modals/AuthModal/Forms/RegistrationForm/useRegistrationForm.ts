@@ -2,6 +2,7 @@ import * as Yup from 'yup';
 
 import { useForm } from '@/hooks/useForm';
 import { getValidationText, Validation } from '@/utils/validation';
+import { FORM_CONFIG } from '@/constants/formConfig';
 
 const getValidationSchema = () => Yup.object().shape({
     email: Yup.string()
@@ -9,8 +10,8 @@ const getValidationSchema = () => Yup.object().shape({
         .email(getValidationText(Validation.Email)),
     password: Yup.string()
         .required(getValidationText(Validation.Required))
-        .min(6, getValidationText(Validation.MinLength, { value: 6 }))
-        .max(32, getValidationText(Validation.MaxLength, { value: 30 }))
+        .min(FORM_CONFIG.auth.password.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.auth.password.min }))
+        .max(FORM_CONFIG.auth.password.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.auth.password.max }))
 });
 
 type Schema = ReturnType<typeof getValidationSchema>

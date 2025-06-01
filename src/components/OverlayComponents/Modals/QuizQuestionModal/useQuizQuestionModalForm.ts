@@ -3,19 +3,21 @@ import * as Yup from 'yup';
 import { useForm } from '@/hooks/useForm';
 import { getValidationText, Validation } from '@/utils/validation';
 import { QuestionDto } from '@/@types/quiz';
+import { FORM_CONFIG } from '@/constants/formConfig';
 
 
 const getValidationSchema = (minAnswersCount: number, maxAnswersCount: number) => Yup.object().shape({
     title: Yup.string()
         .required(getValidationText(Validation.Required))
-        .min(6, getValidationText(Validation.MinLength, { value: 6 }))
-        .max(100, getValidationText(Validation.MaxLength, { value: 100 })),
+        .min(FORM_CONFIG.questions.title.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.questions.title.min }))
+        .max(FORM_CONFIG.questions.title.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.questions.title.max })),
     answers: Yup.array().of(
         Yup.object().shape({
             id: Yup.string().required(),
             title: Yup.string()
                 .required(getValidationText(Validation.Required))
-                .max(50, getValidationText(Validation.MaxLength, { value: 50 })),
+                .min(FORM_CONFIG.answers.title.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.answers.title.min }))
+                .max(FORM_CONFIG.answers.title.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.answers.title.max })),
             isCorrect: Yup.boolean().required()
         })
     ).required()
@@ -33,13 +35,13 @@ const getInitialValues = (question?: QuestionDto): FormValues => {
     }
 }
 
-export const useQuizQuestionModalForm = (question?: QuestionDto, minAnswersCount?: number, maxAnswersCount?: number) => {
+export const useQuizQuestionModalForm = (minAnswersCount: number, maxAnswersCount: number, question?: QuestionDto) => {
     const {
         values, isValid, errors,
         setFieldValue, setValues, validate
     } = useForm({
         initialValues: getInitialValues(question),
-        validationSchema: getValidationSchema(minAnswersCount || 2, maxAnswersCount || 4)
+        validationSchema: getValidationSchema(minAnswersCount, maxAnswersCount)
     });
 
     const isAnswerItemError = (answers: unknown): answers is { title: string }[] => {
