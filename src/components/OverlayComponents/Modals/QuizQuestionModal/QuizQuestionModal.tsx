@@ -18,6 +18,7 @@ import { MdCheckCircleOutline, MdDeleteOutline } from 'react-icons/md';
 import { Row } from '@/components/Form/Row';
 import { Feedback } from '@/components/Form/Feedback';
 import classNames from 'classnames';
+import { FORM_CONFIG } from '@/constants/formConfig';
 
 
 export type QuizQuestionModalProps = ModalProps & {
@@ -29,13 +30,15 @@ export type QuizQuestionModalProps = ModalProps & {
 }
 
 export const QuizQuestionModal: React.FC<QuizQuestionModalProps> = ({
-    question, titleTextId, minAnswersCount = 2, maxAnswersCount = 4,
+    question, titleTextId,
+    minAnswersCount = FORM_CONFIG.answers.minCount,
+    maxAnswersCount = FORM_CONFIG.answers.maxCount,
     onClose, ...props
 }) => {
     const {
         values, errors, isValid,
         setFieldValue, validate, isAnswerItemError
-    } = useQuizQuestionModalForm(question);
+    } = useQuizQuestionModalForm(minAnswersCount, maxAnswersCount, question);
 
     const handleSubmit = async () => {
         if (!await validate()) return;

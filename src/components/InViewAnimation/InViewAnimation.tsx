@@ -4,7 +4,7 @@ import { HTMLMotionProps, motion, Variants } from 'framer-motion';
 
 const variants: Variants = {
     scaleVisible: { opacity: 1, scale: 1 },
-    scaleHidden: { opacity: 0, scale: 0 },
+    scaleHidden: { opacity: 0, scale: 0.8 },
     opacityVisible: { opacity: 1 },
     opacityHidden: { opacity: 0 },
     translateLeftVisible: { opacity: 1, x: 0 },
@@ -20,14 +20,19 @@ type Props = PropsWithChildren & HTMLMotionProps<"div"> & {
     duration?: number;
     delay?: number;
     className?: string;
+    isAnimationDisabled?: boolean;
 }
 
-export const InViewAnimation: FC<Props> = ({ variant, duration, delay, className, children, ...props }) => {
+export const InViewAnimation: FC<Props> = ({
+    variant, duration, delay, className, isAnimationDisabled, children, ...props
+}) => {
     const getVisibleName = () => {
+        if (isAnimationDisabled) return '';
         return variant + 'Visible';
     }
 
     const getHiddenName = () => {
+        if (isAnimationDisabled) return '';
         return variant + 'Hidden';
     }
     

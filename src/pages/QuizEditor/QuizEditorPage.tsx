@@ -1,6 +1,8 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { ROUTES } from '@/constants/routes';
+
 import { Container } from '@/components/Container';
 import { Breakpoints } from '@/constants/screen';
 import { Loading } from '@/components/Loading';
@@ -11,11 +13,13 @@ import styles from './QuizEditorPage.module.scss';
 import { useQuizEditorPage } from './useQuizEditorPage';
 import { QuizQuestions } from './Questions/QuizQuestions';
 import { QuizOptions } from './QuizOptions/QuizOptions';
+import { ForbiddenPage } from '../Errors/403ForbiddenPage';
+import { NotFoundPage } from '../Errors/404NotFoundPage';
 
 
 const QuizEditorPage: FC = () => {
     const {
-        values, errors, isValid, isLoading, isCompletedOnce, isNew,
+        values, errors, isValid, isLoading, isCompletedOnce, isNew, status,
         setFieldValue, validate, addQuestion, editQuestion, removeQuestion, submit
     } = useQuizEditorPage();
 
@@ -25,11 +29,19 @@ const QuizEditorPage: FC = () => {
         if (!await (validate())) return;
 
         await submit();
-        navigate('/');
+        navigate(ROUTES.myQuizzes.get());
     }
 
     if (!isCompletedOnce) return (
         <Loading fillContainer />
+    );
+
+    if (status === 'forbidden') return (
+        <ForbiddenPage />
+    );
+
+    if (status === 'notFound') return (
+        <NotFoundPage />
     );
 
     return (

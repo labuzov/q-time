@@ -1,17 +1,22 @@
 import { FC } from 'react';
 
 import { Welcome } from './Welcome/Welcome';
-import { QuizList } from './QuizList/QuizList';
+import { TopQuizzes } from './TopQuizzes/TopQuizzes';
 import { Footer } from './Footer/Footer';
+import { useHomePage } from './useHomePage';
 
 
 const HomePage: FC = () => {
+    const { quizzes, isQuizListLoading } = useHomePage();
 
     return ( 
         <div>
             <Welcome />
 
-            <QuizList />
+            <TopQuizzes
+                quizzes={quizzes}
+                isLoading={isQuizListLoading}
+            />
 
             <Footer />
         </div>

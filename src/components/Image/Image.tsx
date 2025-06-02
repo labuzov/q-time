@@ -1,5 +1,5 @@
 import { HTMLProps, useState } from 'react';
-import { MdErrorOutline } from 'react-icons/md';
+import { MdOutlineNoPhotography } from 'react-icons/md';
 import classNames from 'classnames';
 
 import { Skeleton } from '@/components/Skeleton';
@@ -43,7 +43,7 @@ export const Image: React.FC<ImageProps> = ({ src, className, ...props }) => {
     const renderError = () => {
         return (
             <div className={styles.error} style={{ width, height }} title="Failed to load">
-                <MdErrorOutline />
+                <MdOutlineNoPhotography />
             </div>
         );
     }

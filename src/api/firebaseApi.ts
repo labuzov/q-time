@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, DocumentSnapshot, FirestoreError, getDoc, getDocs, UpdateData, updateDoc, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentSnapshot, FieldPath, FirestoreError, getDoc, getDocs, query, UpdateData, updateDoc, where, WhereFilterOp, writeBatch } from 'firebase/firestore';
 
 import { firebaseFirestore } from '@/firebaseConfig';
 import { logError } from '@/utils/logging';
@@ -8,6 +8,11 @@ import { getRandomId } from '@/utils/random';
 type FirebaseData<T> = T & {
     id: string;
 };
+type Filter = {
+    fieldPath: string | FieldPath;
+    opStr: WhereFilterOp;
+    value: unknown
+}
 
 export const firebaseApi = {
     getDoc: async <T>(path: string) => {
@@ -24,9 +29,15 @@ export const firebaseApi = {
         }
     },
 
-    getDocs: async <T>(path: string) => {
+    getDocs: async <T>(path: string, filter?: Filter) => {
         try {
-            const snapshot = await getDocs(collection(firebaseFirestore, path));
+            let newQuery = query(collection(firebaseFirestore, path));
+            if (filter) {
+                const { fieldPath, opStr, value } = filter;
+
+                newQuery = query(newQuery, where(fieldPath, opStr, value));
+            }
+            const snapshot = await getDocs(newQuery);
 
             const data: T[] = [];
 
@@ -86,6 +97,14 @@ export const firebaseApi = {
             }
 
             await batch.commit();
+        } catch (error: unknown) {
+            handleError(error);
+        }
+    },
+
+    deleteDoc: async (path: string) => {
+        try {
+            await deleteDoc(doc(firebaseFirestore, path));
         } catch (error: unknown) {
             handleError(error);
         }

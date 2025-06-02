@@ -3,30 +3,29 @@ import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { getValidationText, Validation } from '@/utils/validation';
+import { useLoadingStatus } from '@/hooks/useLoadingStatus';
 import { useLoading } from '@/hooks/useLoading';
 import { useForm } from '@/hooks/useForm';
 import { quizApi } from '@/api/quizApi';
-import { QuestionDto, QuizDto } from '@/@types/quiz';
 import { firebaseAuth } from '@/firebaseConfig';
+import { FORM_CONFIG } from '@/constants/formConfig';
+import { QuestionDto, QuizDto } from '@/@types/quiz';
 
-
-const minQuestionsCount = 1;
-const maxQuestionsLength = 20;
 
 const getValidationSchema = () => Yup.object().shape({
     title: Yup.string()
         .required(getValidationText(Validation.Required))
-        .min(10, getValidationText(Validation.MinLength, { value: 10 }))
-        .max(60, getValidationText(Validation.MaxLength, { value: 60 })),
+        .min(FORM_CONFIG.quiz.title.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.quiz.title.min }))
+        .max(FORM_CONFIG.quiz.title.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.title.max })),
     description: Yup.string()
         .required(getValidationText(Validation.Required))
-        .min(10, getValidationText(Validation.MinLength, { value: 10 }))
-        .max(100, getValidationText(Validation.MaxLength, { value: 100 })),
+        .min(FORM_CONFIG.quiz.description.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.quiz.description.min }))
+        .max(FORM_CONFIG.quiz.description.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.description.max })),
     imageUrl: Yup.string()
-        .max(500, getValidationText(Validation.MaxLength, { value: 500 })),
+        .max(FORM_CONFIG.quiz.imageUrl.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.imageUrl.max })),
     questions: Yup.array<QuestionDto, QuestionDto>()
-        .min(minQuestionsCount, getValidationText(Validation.MinQuestionsLength, { value: minQuestionsCount }))
-        .max(maxQuestionsLength, getValidationText(Validation.MaxQuestionsLength, { value: maxQuestionsLength }))
+        .min(FORM_CONFIG.questions.minCount, getValidationText(Validation.MinQuestionsLength, { value: FORM_CONFIG.questions.minCount }))
+        .max(FORM_CONFIG.questions.maxCount, getValidationText(Validation.MaxQuestionsLength, { value: FORM_CONFIG.questions.maxCount }))
 });
 
 type Schema = ReturnType<typeof getValidationSchema>
@@ -48,7 +47,8 @@ export const useQuizEditorPage = () => {
     } = useForm({
         initialValues,
         validationSchema: getValidationSchema()
-    })
+    });
+    const { status, setStatus } = useLoadingStatus();
 
     const isNew = !id || id === 'new';
 
@@ -67,7 +67,15 @@ export const useQuizEditorPage = () => {
 
     const loadQuiz = async (id: string) => {
         const quizData = await quizApi.getQuizById(id);
-        if (!quizData) return;
+        if (!quizData) {
+            setStatus('notFound');
+            return;
+        };
+
+        if (quizData.createdBy !== firebaseAuth.currentUser?.uid) {
+            setStatus('forbidden');
+            return;
+        }
 
         setValues({
             title: quizData.title ?? '',
@@ -130,6 +138,7 @@ export const useQuizEditorPage = () => {
         values,
         errors,
         isValid,
+        status,
         setFieldValue,
         validate,
         addQuestion,
