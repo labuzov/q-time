@@ -1,0 +1,22 @@
+@use "/src/styles/shared" as shared;
+
+.content {
+    margin-top: 3rem;
+
+    @include shared.bp-m {
+        margin-top: 2.5rem;
+    }
+
+    @include shared.bp-s {
+        margin-top: 2rem;
+    }
+}
+
+.noContent {
+    margin-top: 5rem;
+}
+
+.text {
+    text-align: center;
+    color: var(--color-text-secondary);
+}

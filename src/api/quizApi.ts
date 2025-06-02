@@ -1,10 +1,21 @@
 import { Question, QuestionDto, Quiz, QuizDto } from '@/@types/quiz';
+import { firebaseAuth } from '@/firebaseConfig';
+
 import { firebaseApi } from './firebaseApi';
 
 
 export const quizApi = {
     getQuizzes: async () => {
         const data = await firebaseApi.getDocs<Quiz>(`quizzes`);
+        return data;
+    },
+
+    getMyQuizzes: async () => {
+        const data = await firebaseApi.getDocs<Quiz>(`quizzes`, {
+            fieldPath: 'createdBy',
+            opStr: "==",
+            value: firebaseAuth.currentUser?.uid ?? ''
+        });
         return data;
     },
 
@@ -29,5 +40,10 @@ export const quizApi = {
         await firebaseApi.updateDoc(`quizzes/${quizId}`, quiz);
         await firebaseApi.clearDocs(`quizzes/${quizId}/questions`);
         await firebaseApi.addDocs(`quizzes/${quizId}/questions`, questions);
+    },
+
+    deleteQuiz: async (quizId: string) => {
+        await firebaseApi.clearDocs(`quizzes/${quizId}/questions`);
+        await firebaseApi.deleteDoc(`quizzes/${quizId}`);
     }
 }

@@ -6,6 +6,7 @@ import { OverlayComponentsContainer } from '@/components/OverlayComponents/Overl
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Loading } from '@/components/Loading';
 import { NotFoundPage } from '@/pages/Errors/404NotFoundPage';
+import { ForbiddenPage } from '@/pages/Errors/403ForbiddenPage';
 import { useI18nInit } from '@/hooks/initialization/useI18nInit';
 import { useAuthInit } from '@/hooks/initialization/useAuthInit';
 
@@ -15,6 +16,7 @@ import './styles/App.scss';
 const HomePage = lazy(() => import('@/pages/Home/HomePage'));
 const QuizPage = lazy(() => import('@/pages/Quiz/QuizPage'));
 const QuizEditorPage = lazy(() => import('@/pages/QuizEditor/QuizEditorPage'));
+const MyQuizzesPage = lazy(() => import('@/pages/MyQuizzes/MyQuizzesPage'));
 
 const App = () => {
     const { isAuthInit } = useAuthInit();
@@ -34,7 +36,9 @@ const App = () => {
 
                             <Route path={ROUTES.quiz.path} element={<QuizPage />} />
                             <Route path={ROUTES.quizEditor.path} element={<QuizEditorPage />} />
+                            <Route path={ROUTES.myQuizzes.path} element={<MyQuizzesPage />} />
 
+                            <Route path={ROUTES.forbidden.path} element={<ForbiddenPage />} />
                             <Route path="*" element={<NotFoundPage />} />
                         </Routes>
                     </Suspense>

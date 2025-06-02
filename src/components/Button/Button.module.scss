@@ -60,5 +60,18 @@
             opacity: 1;
         }
     }
+
+    &.icon {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        color: var(--color-text);
+        border-radius: 50%;
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
 }
 

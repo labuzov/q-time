@@ -75,10 +75,17 @@
     "editor.button.save": "Сохранить",
     "editor.button.addQuestion": "Добавить вопрос",
 
+    "myQuizzes.title": "Мои квизы",
+    "myQuizzes.noContent": "У вас еще нет квизов",
+    "myQuizzes.actions.create": "Новый квиз",
+    "myQuizzes.actions.delete.message": "Вы действительно хотите удалить квиз \"{{value}}\"",
+
     "error.default.text": "Ошибка",
     "error.default.description": "Что-то пошло не так. Уже работаем над этим",
     "error.404.text": "Страница не найдена",
     "error.404.description": "Запрашиваемый вами ресурс не существует или был удален",
+    "error.403.text": "Доступ запрещен",
+    "error.403.description": "К сожалению, доступ к ресурсу запрещен",
     "error.button.goHome": "Вернуться на главную",
 
     "validation.invalid": "Некорректное значение",

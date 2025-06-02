@@ -5,17 +5,18 @@ import { ModalProps, ModalBase } from '../../Modals';
 import { ModalHeader } from '../ModalHeader';
 import { ModalContent } from '../ModalContent';
 import { ModalFooter } from '../ModalFooter';
+import { JSX } from 'react';
 
 
 export type ConfirmationModalProps = ModalProps & {
-    message?: string;
     cancelButtonText?: string;
     confirmButtonText?: string;
     onConfirm?: () => void;
+    textRender?: () => JSX.Element;
 }
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
-    message, cancelButtonText, confirmButtonText, onConfirm, onClose, ...props
+    cancelButtonText, confirmButtonText, onConfirm, onClose, textRender, ...props
 }) => {
     const handleConfirm = () => {
         onConfirm?.();
@@ -34,7 +35,13 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
                 <Typography textId={'modal.confirmation.title'} />
             </ModalHeader>
             <ModalContent>
-                <Typography textId={message ?? 'modal.confirmation.text'} />
+                {!!textRender ? (
+                    <>
+                        {textRender()}
+                    </>
+                ) : (
+                    <Typography textId="modal.confirmation.text" />
+                )}
             </ModalContent>
             <ModalFooter>
                 <Button variant="secondary" onClick={handleCancel}>

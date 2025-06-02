@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
 import { getValidationText, Validation } from '@/utils/validation';
+import { useLoadingStatus } from '@/hooks/useLoadingStatus';
 import { useLoading } from '@/hooks/useLoading';
 import { useForm } from '@/hooks/useForm';
 import { quizApi } from '@/api/quizApi';
-import { QuestionDto, QuizDto } from '@/@types/quiz';
 import { firebaseAuth } from '@/firebaseConfig';
 import { FORM_CONFIG } from '@/constants/formConfig';
+import { QuestionDto, QuizDto } from '@/@types/quiz';
 
 
 const getValidationSchema = () => Yup.object().shape({
@@ -46,7 +47,8 @@ export const useQuizEditorPage = () => {
     } = useForm({
         initialValues,
         validationSchema: getValidationSchema()
-    })
+    });
+    const { status, setStatus } = useLoadingStatus();
 
     const isNew = !id || id === 'new';
 
@@ -65,7 +67,15 @@ export const useQuizEditorPage = () => {
 
     const loadQuiz = async (id: string) => {
         const quizData = await quizApi.getQuizById(id);
-        if (!quizData) return;
+        if (!quizData) {
+            setStatus('notFound');
+            return;
+        };
+
+        if (quizData.createdBy !== firebaseAuth.currentUser?.uid) {
+            setStatus('forbidden');
+            return;
+        }
 
         setValues({
             title: quizData.title ?? '',
@@ -128,6 +138,7 @@ export const useQuizEditorPage = () => {
         values,
         errors,
         isValid,
+        status,
         setFieldValue,
         validate,
         addQuestion,

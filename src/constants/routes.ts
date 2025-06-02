@@ -10,5 +10,9 @@ export const ROUTES = {
     myQuizzes: {
         path: '/my-quizzes',
         get: () => '/my-quizzes'
+    },
+    forbidden: {
+        path: '/forbidden',
+        get: () => '/forbidden'
     }
 }

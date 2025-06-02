@@ -1,34 +1,25 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC } from 'react';
 
 import { Breakpoints } from '@/constants/screen';
-import { quizApi } from '@/api/quizApi';
 import { Quiz } from '@/@types/quiz';
 
 import { Container } from '@/components/Container';
 import { Typography } from '@/components/Typography';
 import { InViewAnimation } from '@/components/InViewAnimation';
+import { QuizLink, QuizList } from '@/components/QuizList';
+import { Loading } from '@/components/Loading';
 
-import { QuizItem } from './QuizItem/QuizItem';
-import styles from './QuizList.module.scss';
+import styles from './TopQuizzes.module.scss';
 
 
-export const QuizList: FC = () => {
-    const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+type Props = {
+    quizzes: Quiz[];
+    isLoading?: boolean;
+}
 
-    useEffect(() => {
-        loadQuizzes();
-    }, []);
+export const TopQuizzes: FC<Props> = ({ quizzes, isLoading }) => {
 
-    const loadQuizzes = async () => {
-        const data = await quizApi.getQuizzes();
-        setQuizzes(data ?? []);
-    }
-
-    const quizItems = useMemo(() => quizzes.map(quiz => {
-        return <QuizItem key={quiz.id} quiz={quiz} />;
-    }), [quizzes]);
-
-    return ( 
+    return (
         <Container maxWidth={Breakpoints.L}>
             <div className={styles.content}>
                 <div className={styles.text}>
@@ -37,7 +28,14 @@ export const QuizList: FC = () => {
                     </InViewAnimation>
                 </div>
                 <div className={styles.list}>
-                    {quizItems}
+                    {isLoading ? (
+                        <Loading fillContainer />
+                    ) : (
+                        <QuizList
+                            quizzes={quizzes}
+                            itemRender={quiz => <QuizLink quiz={quiz} />}
+                        />
+                    )}
                 </div>
             </div>
         </Container>
