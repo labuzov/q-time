@@ -43,7 +43,7 @@ export const useQuizEditorPage = () => {
     const { id } = useParams<{ id: string }>();
     const {
         values, isValid, errors,
-        setFieldValue, setValues, validate
+        setFieldValue, setFieldValues, validate
     } = useForm({
         initialValues,
         validationSchema: getValidationSchema()
@@ -77,7 +77,7 @@ export const useQuizEditorPage = () => {
             return;
         }
 
-        setValues({
+        setFieldValues({
             title: quizData.title ?? '',
             description: quizData.description ?? '',
             imageUrl: quizData.image ?? '',
@@ -120,7 +120,7 @@ export const useQuizEditorPage = () => {
             title: values.title,
             description: values.description,
             image: values.imageUrl ?? '',
-            createdBy: firebaseAuth.currentUser?.uid ?? ''
+            createdBy: firebaseAuth.currentUser?.uid ?? '',
         };
         const questions: QuestionDto[] = values.questions ?? [];
 

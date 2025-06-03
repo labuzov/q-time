@@ -10,14 +10,11 @@ import { Button } from '@/components/Button';
 import { GoogleButton } from '../../components/GoogleButton/GoogleButton';
 import { FormHeader } from '../../components/Header/FormHeader';
 import { ActionPrompt } from '../../components/ActionPrompt/ActionPrompt';
-import { OperationAlert } from '../../components/OperationAlert/OperationAlert';
-import { AuthOperationStatus } from '../../types';
 import { useRegistrationForm } from './useRegistrationForm';
 import styles from '../../AuthModal.module.scss';
 
 
 type Props = PropsWithChildren & {
-    operationStatus: AuthOperationStatus;
     isLoading?: boolean;
     onPromptClick: () => void;
     onRegisterWithEmail: (email: string, password: string) => Promise<void>;
@@ -25,7 +22,7 @@ type Props = PropsWithChildren & {
 }
 
 export const RegistrationForm: React.FC<Props> = ({
-    operationStatus, isLoading, onPromptClick, onRegisterWithEmail, onRegisterWithGoogle
+    isLoading, onPromptClick, onRegisterWithEmail, onRegisterWithGoogle
 }) => {
     const { values, isValid, errors, setFieldValue, validate } = useRegistrationForm();
 
@@ -72,10 +69,6 @@ export const RegistrationForm: React.FC<Props> = ({
                     />
                 </FeedbackWrapper>
             </Row>
-
-            {!!operationStatus && (
-                <OperationAlert textId={operationStatus.text} variant={operationStatus.variant} />
-            )}
 
             <div className={styles.buttons}>
                 <Button

@@ -1,8 +1,10 @@
-import { addDoc, collection, deleteDoc, doc, DocumentSnapshot, FieldPath, FirestoreError, getDoc, getDocs, query, UpdateData, updateDoc, where, WhereFilterOp, writeBatch } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, DocumentSnapshot, FieldPath, FirestoreError, getDoc, getDocs, query, UpdateData, updateDoc, where, WhereFilterOp, writeBatch } from 'firebase/firestore/lite';
+import { FirebaseError } from 'firebase/app';
 
 import { firebaseFirestore } from '@/firebaseConfig';
 import { logError } from '@/utils/logging';
 import { getRandomId } from '@/utils/random';
+import { showErrorNotification } from '@/utils/notifications';
 
 
 type FirebaseData<T> = T & {
@@ -125,7 +127,8 @@ const handleError = (error: unknown) => {
         logError(error.message);
     }
 
-    if (error instanceof FirestoreError) {
+    if (error instanceof FirestoreError || error instanceof FirebaseError) {
+        showErrorNotification(error.code);
         logError(error.message);
     }
 }

@@ -27,7 +27,7 @@ export const QuizOptions: FC<Props> = ({
 }) => {
 
 
-    return ( 
+    return (
         <div className={styles.options}>
             <div className={styles.paper}>
                 <Typography textId="editor.options.title" variant="h5" className={styles.title} />

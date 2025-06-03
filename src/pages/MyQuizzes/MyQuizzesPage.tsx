@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import { useProtectedRoute } from '@/hooks/useProtectedRoute';
 import { Breakpoints } from '@/constants/screen';
 
 import { Container } from '@/components/Container';
@@ -12,6 +13,7 @@ import styles from './MyQuizzesPage.module.scss';
 
 const MyQuizzesPage: FC = () => {
     const { quizzes, isLoading, createQuiz, editQuiz, deleteQuiz } = useMyQuizzesPage();
+    useProtectedRoute();
 
     return ( 
         <div className={styles.wrapper}>

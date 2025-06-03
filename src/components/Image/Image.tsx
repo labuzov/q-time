@@ -17,7 +17,6 @@ enum ImageStatus {
 }
 
 type ImageProps = HTMLProps<HTMLDivElement> & {
-    src?: string;
     width?: number | string;
     height?: number | string;
 }
@@ -55,13 +54,15 @@ export const Image: React.FC<ImageProps> = ({ src, className, ...props }) => {
                 className={classNames(styles.image, className)}
                 style={{ display: status === ImageStatus.Loaded ? 'flex' : 'none', width, height }}
             >
-                <img
-                    src={src}
-                    width="100%"
-                    height="100%"
-                    onLoad={handleLoad}
-                    onError={handleError}
-                />
+                {!!src && (
+                    <img
+                        src={src}
+                        width="100%"
+                        height="100%"
+                        onLoad={handleLoad}
+                        onError={handleError}
+                    />
+                )}
             </div>
 
             {!!src && status === ImageStatus.None && (

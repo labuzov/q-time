@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 
 import { OverlayComponentsContainer } from '@/components/OverlayComponents/OverlayComponentsContainer';
+import { NotificationsContainer } from '@/components/Notification';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Loading } from '@/components/Loading';
 import { NotFoundPage } from '@/pages/Errors/404NotFoundPage';
@@ -27,6 +28,7 @@ const App = () => {
     return (
         <ErrorBoundary>
             <OverlayComponentsContainer />
+            <NotificationsContainer />
 
             {isAppInit ? (
                 <Layout>

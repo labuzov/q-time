@@ -9,21 +9,18 @@ import { Button } from '@/components/Button';
 
 import { FormHeader } from '../../components/Header/FormHeader';
 import { ActionPrompt } from '../../components/ActionPrompt/ActionPrompt';
-import { OperationAlert } from '../../components/OperationAlert/OperationAlert';
-import { AuthOperationStatus } from '../../types';
 import { useResetPasswordForm } from './useResetPasswordForm';
 import styles from '../../AuthModal.module.scss';
 
 
 type Props = PropsWithChildren & {
-    operationStatus: AuthOperationStatus;
     isLoading?: boolean;
     onPromptClick: () => void;
     onPasswordReset: (email: string) => Promise<void>;
 }
 
 export const ResetPasswordForm: React.FC<Props> = ({
-    operationStatus, isLoading, onPromptClick, onPasswordReset
+    isLoading, onPromptClick, onPasswordReset
 }) => {
     const { values, isValid, errors, setFieldValue, validate } = useResetPasswordForm();
 
@@ -55,10 +52,6 @@ export const ResetPasswordForm: React.FC<Props> = ({
                     />
                 </FeedbackWrapper>
             </Row>
-
-            {!!operationStatus && (
-                <OperationAlert textId={operationStatus.text} variant={operationStatus.variant} />
-            )}
 
             <div className={styles.buttons}>
                 <Button

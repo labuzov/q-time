@@ -19,7 +19,7 @@ export const QuizCard: FC<Props> = ({ quiz, isHoverAnimationDisabled }) => {
     return (
         <div className={classNames(styles.card, !isHoverAnimationDisabled && styles.cardHover)}>
             <div className={styles.image}>
-                <Image src={image ?? ''} />
+                <Image src={image} />
             </div>
             <div className={styles.content}>
                 <div className={styles.title}>{title}</div>

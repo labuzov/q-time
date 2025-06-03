@@ -23,6 +23,13 @@ export const useForm = <T extends FormikValues>({ initialValues, validationSchem
         setFieldError(field as string, undefined);
     }
 
+    const setFieldValues = (values: Partial<T>) => {
+        setValues(currentValues => ({
+            ...currentValues,
+            ...values
+        }));
+    }
+
     const validate = async () => {
         const errors = await validateForm(values);
         const isValid = !Object.keys(errors).length;
@@ -35,7 +42,7 @@ export const useForm = <T extends FormikValues>({ initialValues, validationSchem
         errors,
         isValid,
         setFieldValue,
-        setValues,
+        setFieldValues,
         validate
     };
 }
