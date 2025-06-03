@@ -43,9 +43,8 @@ export const useMyQuizzesPage = () => {
             return;
         };
 
-        setQuizzes(list => list.filter(({ id }) => id !== quizId));
-
         await quizApi.deleteQuiz(quizId);
+        setQuizzes(list => list.filter(({ id }) => id !== quizId));
     }
 
     return {

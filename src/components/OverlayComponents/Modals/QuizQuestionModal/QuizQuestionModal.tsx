@@ -1,12 +1,18 @@
+import classNames from 'classnames';
+import { MdCheckCircleOutline, MdDeleteOutline } from 'react-icons/md';
 
 import { QuestionDto } from '@/@types/quiz';
 import { getRandomId } from '@/utils/random';
+import { firebaseAuth } from '@/firebaseConfig';
+import { FORM_CONFIG } from '@/constants/formConfig';
 
 import { Button } from '@/components/Button';
 import { Label } from '@/components/Form/Label';
 import { Typography } from '@/components/Typography';
 import { Input } from '@/components/FormControls/Input';
 import { FeedbackWrapper } from '@/components/Form/Feedback/FeedbackWrapper';
+import { Feedback } from '@/components/Form/Feedback';
+import { Row } from '@/components/Form/Row';
 
 import { useQuizQuestionModalForm } from './useQuizQuestionModalForm';
 import { ModalProps, ModalBase } from '../../Modals';
@@ -14,11 +20,6 @@ import { ModalContent } from '../ModalContent';
 import { ModalHeader } from '../ModalHeader';
 import { ModalFooter } from '../ModalFooter';
 import styles from './QuizQuestionModal.module.scss';
-import { MdCheckCircleOutline, MdDeleteOutline } from 'react-icons/md';
-import { Row } from '@/components/Form/Row';
-import { Feedback } from '@/components/Form/Feedback';
-import classNames from 'classnames';
-import { FORM_CONFIG } from '@/constants/formConfig';
 
 
 export type QuizQuestionModalProps = ModalProps & {
@@ -46,6 +47,7 @@ export const QuizQuestionModal: React.FC<QuizQuestionModalProps> = ({
         const questionDto: QuestionDto = {
             title: values.title,
             answers: values.answers,
+            createdBy: firebaseAuth.currentUser?.uid ?? '',
             isEdited: true
         }
 

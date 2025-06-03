@@ -10,14 +10,11 @@ import { Button } from '@/components/Button';
 import { GoogleButton } from '../../components/GoogleButton/GoogleButton';
 import { FormHeader } from '../../components/Header/FormHeader';
 import { ActionPrompt } from '../../components/ActionPrompt/ActionPrompt';
-import { OperationAlert } from '../../components/OperationAlert/OperationAlert';
-import { AuthOperationStatus } from '../../types';
 import { useLoginForm } from './useLoginForm';
 import styles from '../../AuthModal.module.scss';
 
 
 type Props = PropsWithChildren & {
-    operationStatus?: AuthOperationStatus;
     isLoading?: boolean;
     onPromptClick: () => void;
     onResetPasswordClick: () => void;
@@ -26,7 +23,7 @@ type Props = PropsWithChildren & {
 }
 
 export const LoginForm: React.FC<Props> = ({
-    operationStatus, isLoading,
+    isLoading,
     onPromptClick, onResetPasswordClick, onLoginWithEmail, onLoginWithGoogle
 }) => {
     const { values, isValid, errors, setFieldValue, validate } = useLoginForm();
@@ -84,10 +81,6 @@ export const LoginForm: React.FC<Props> = ({
                     onClick={onResetPasswordClick}
                 />
             </div>
-
-            {!!operationStatus && (
-                <OperationAlert textId={operationStatus.text} variant={operationStatus.variant} />
-            )}
 
             <div className={styles.buttons}>
                 <Button

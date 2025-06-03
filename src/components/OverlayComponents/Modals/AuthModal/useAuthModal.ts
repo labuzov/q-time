@@ -4,19 +4,18 @@ import { FirebaseError } from 'firebase/app';
 import { useAuthStore } from '@/stores/AuthStore';
 import { useLoading } from '@/hooks/useLoading';
 
-import { AuthModalForm, AuthOperationStatus } from './types';
+import { AuthModalForm } from './types';
+import { showErrorNotification, showSuccessNotification } from '@/utils/notifications';
 
 
 export const useAuthModal = (onAuth?: () => void) => {
     const authStore = useAuthStore();
 
     const [currentForm, setCurrentForm] = useState<AuthModalForm>(AuthModalForm.Login);
-    const [operationStatus, setOperationStatus] = useState<AuthOperationStatus | null>(null);
 
     const { isLoading, addToLoading } = useLoading();
 
     const changeCurrentForm = (form: AuthModalForm) => {
-        setOperationStatus(null);
         setCurrentForm(form);
     }
 
@@ -50,7 +49,8 @@ export const useAuthModal = (onAuth?: () => void) => {
     const sendPasswordResetEmail = async (email: string) => {
         try {
             await addToLoading(() => authStore.sendPasswordResetEmail(email));
-            setOperationStatus({ text: 'modal.auth.reset.password.success', variant: 'success' });
+
+            showSuccessNotification('modal.auth.reset.password.success');
         } catch (error: unknown) {
             handleError(error);
         }
@@ -58,13 +58,12 @@ export const useAuthModal = (onAuth?: () => void) => {
 
     const handleError = (error: unknown) => {
         if (error instanceof FirebaseError) {
-            setOperationStatus({ text: error.code, variant: 'error' });
+            showErrorNotification(error.code);
         }
     }
 
     return {
         currentForm,
-        operationStatus,
         isLoading,
         changeCurrentForm,
         registerWithEmail,

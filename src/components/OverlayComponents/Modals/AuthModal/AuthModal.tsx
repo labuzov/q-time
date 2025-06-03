@@ -15,7 +15,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     onClose, ...props
 }) => {
     const {
-        currentForm, operationStatus, isLoading,
+        currentForm, isLoading,
         changeCurrentForm, loginWithEmail, loginWithGoogle,
         registerWithEmail, sendPasswordResetEmail
     } = useAuthModal(handleAuth);
@@ -32,7 +32,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         switch (currentForm) {
             case AuthModalForm.Login: return (
                 <LoginForm
-                    operationStatus={operationStatus}
                     isLoading={isLoading}
                     onLoginWithEmail={loginWithEmail}
                     onLoginWithGoogle={loginWithGoogle}
@@ -42,7 +41,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )
             case AuthModalForm.Registration: return (
                 <RegistrationForm
-                    operationStatus={operationStatus}
                     isLoading={isLoading}
                     onRegisterWithEmail={registerWithEmail}
                     onRegisterWithGoogle={loginWithGoogle}
@@ -51,7 +49,6 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             )
             case AuthModalForm.ResetPassword: return (
                 <ResetPasswordForm
-                    operationStatus={operationStatus}
                     isLoading={isLoading}
                     onPasswordReset={sendPasswordResetEmail}
                     onPromptClick={() => changeCurrentForm(AuthModalForm.Login)}

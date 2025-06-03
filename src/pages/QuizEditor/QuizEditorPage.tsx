@@ -2,12 +2,14 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from '@/constants/routes';
+import { useProtectedRoute } from '@/hooks/useProtectedRoute';
 
 import { Container } from '@/components/Container';
 import { Breakpoints } from '@/constants/screen';
 import { Loading } from '@/components/Loading';
 import { Typography } from '@/components/Typography';
 import { Button } from '@/components/Button';
+import { InViewAnimation } from '@/components/InViewAnimation';
 
 import styles from './QuizEditorPage.module.scss';
 import { useQuizEditorPage } from './useQuizEditorPage';
@@ -18,12 +20,12 @@ import { NotFoundPage } from '../Errors/404NotFoundPage';
 
 
 const QuizEditorPage: FC = () => {
+    useProtectedRoute();
+    const navigate = useNavigate();
     const {
         values, errors, isValid, isLoading, isCompletedOnce, isNew, status,
         setFieldValue, validate, addQuestion, editQuestion, removeQuestion, submit
     } = useQuizEditorPage();
-
-    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         if (!await (validate())) return;
@@ -47,7 +49,7 @@ const QuizEditorPage: FC = () => {
     return (
         <Container maxWidth={Breakpoints.XL}>
             <div className={styles.content}>
-                <div className={styles.header}>
+                <InViewAnimation className={styles.header} variant="opacity">
                     <div className={styles.info}>
                         <Typography
                             textId={isNew ? 'editor.title.new' : 'editor.title.edit'}
@@ -63,10 +65,10 @@ const QuizEditorPage: FC = () => {
                             <Typography textId="editor.button.save" />
                         </Button>
                     </div>
-                </div>
+                </InViewAnimation>
 
                 <div className={styles.forms}>
-                    <div className={styles.options}>
+                    <InViewAnimation className={styles.options} variant="translateTop" duration={0.2}>
                         <QuizOptions
                             title={values.title}
                             titleError={errors.title}
@@ -78,15 +80,15 @@ const QuizEditorPage: FC = () => {
                             onDescriptionChange={v => setFieldValue('description', v)}
                             onImageUrlChange={v => setFieldValue('imageUrl', v)}
                         />
-                    </div>
-                    <div className={styles.questions}>
+                    </InViewAnimation>
+                    <InViewAnimation className={styles.questions} variant="translateTop" duration={0.2}>
                         <QuizQuestions
                             questions={values.questions ?? []}
                             onAdd={addQuestion}
                             onEdit={editQuestion}
                             onRemove={removeQuestion}
                         />
-                    </div>
+                    </InViewAnimation>
                 </div>
             </div>
         </Container>

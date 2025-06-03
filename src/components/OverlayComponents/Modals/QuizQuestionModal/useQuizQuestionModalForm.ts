@@ -38,7 +38,7 @@ const getInitialValues = (question?: QuestionDto): FormValues => {
 export const useQuizQuestionModalForm = (minAnswersCount: number, maxAnswersCount: number, question?: QuestionDto) => {
     const {
         values, isValid, errors,
-        setFieldValue, setValues, validate
+        setFieldValue, validate
     } = useForm({
         initialValues: getInitialValues(question),
         validationSchema: getValidationSchema(minAnswersCount, maxAnswersCount)
@@ -58,7 +58,6 @@ export const useQuizQuestionModalForm = (minAnswersCount: number, maxAnswersCoun
         errors,
         isAnswerItemError,
         setFieldValue,
-        setValues,
         validate
     }
 }

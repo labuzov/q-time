@@ -80,6 +80,7 @@
     "myQuizzes.actions.create": "Новый квиз",
     "myQuizzes.actions.delete.message": "Вы действительно хотите удалить квиз \"{{value}}\"",
 
+    "error.unknown": "Что-то пошло не так",
     "error.default.text": "Ошибка",
     "error.default.description": "Что-то пошло не так. Уже работаем над этим",
     "error.404.text": "Страница не найдена",
@@ -105,5 +106,7 @@
     "auth/popup-closed-by-user": "Окно входа было закрыто",
     "auth/too-many-requests": "Слишком много запросов. Попробуйте позже",
     "auth/network-request-failed": "Проблема с интернет-соединением",
-    "auth/internal-error": "Неопознанная ошибка"
+    "auth/internal-error": "Неопознанная ошибка",
+    "auth/cancelled-popup-request": "Окно было закрыто",
+    "permission-denied": "Операция запрещена"
 }

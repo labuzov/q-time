@@ -9,6 +9,7 @@ import { Typography } from '@/components/Typography';
 import { Container } from '@/components/Container';
 
 import styles from './Preview.module.scss';
+import { InViewAnimation } from '@/components/InViewAnimation';
 
 
 type Props = {
@@ -27,23 +28,23 @@ export const Preview: FC<Props> = ({ title, description, src, onStart }) => {
 
     return (
         <Container maxWidth={Breakpoints.M} className={styles.container}>
-            <div className={styles.image}>
-                <Image src={src || ''} />
-            </div>
+            <InViewAnimation className={styles.image} variant="opacity">
+                <Image src={src} />
+            </InViewAnimation>
 
-            <div className={styles.content}>
+            <InViewAnimation className={styles.content} variant="translateLeft" delay={0.2}>
                 <Typography className={styles.title} variant="h3">{title}</Typography>
                 <Typography className={styles.description}>{description}</Typography>
-            </div>
+            </InViewAnimation>
 
-            <div className={styles.actions}>
+            <InViewAnimation className={styles.actions} variant="translateTop" delay={0.4}>
                 <Button
                     disabled={isLoading}
                     onClick={handleStartClick}
                 >
                     <Typography textId="quiz.button.start" />
                 </Button>
-            </div>
+            </InViewAnimation>
         </Container>
     );
 }
