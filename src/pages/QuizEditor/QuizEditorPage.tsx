@@ -24,7 +24,7 @@ const QuizEditorPage: FC = () => {
     const navigate = useNavigate();
     const {
         values, errors, isValid, isLoading, isCompletedOnce, isNew, status,
-        setFieldValue, validate, addQuestion, editQuestion, removeQuestion, submit
+        setFieldValue, validate, addQuestion, editQuestion, removeQuestion, setImage, submit
     } = useQuizEditorPage();
 
     const handleSubmit = async () => {
@@ -78,7 +78,8 @@ const QuizEditorPage: FC = () => {
                             imageUrlError={errors.imageUrl}
                             onTitleChange={v => setFieldValue('title', v)}
                             onDescriptionChange={v => setFieldValue('description', v)}
-                            onImageUrlChange={v => setFieldValue('imageUrl', v)}
+                            onImageChange={v => setImage(v)}
+                            onImageClear={() => setFieldValue('imageUrl', '')}
                         />
                     </InViewAnimation>
                     <InViewAnimation className={styles.questions} variant="translateTop" duration={0.2}>

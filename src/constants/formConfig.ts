@@ -8,14 +8,14 @@ export const FORM_CONFIG = {
     quiz: {
         title: {
             min: 6,
-            max: 50
+            max: 100
         },
         description: {
             min: 10,
-            max: 100
+            max: 200
         },
-        imageUrl: {
-            max: 500
+        image: {
+            maxSizeInMb: 1
         }
     },
     questions: {
@@ -23,8 +23,8 @@ export const FORM_CONFIG = {
         maxCount: 30,
 
         title: {
-            min: 6,
-            max: 100
+            min: 5,
+            max: 200
         }
     },
     answers: {
@@ -33,7 +33,7 @@ export const FORM_CONFIG = {
 
         title: {
             min: 1,
-            max: 50
+            max: 100
         }
     }
 }

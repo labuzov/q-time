@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { MdDeleteOutline } from 'react-icons/md';
 
 import { FeedbackWrapper } from '@/components/Form/Feedback/FeedbackWrapper';
 import { Input } from '@/components/FormControls/Input';
@@ -7,7 +8,14 @@ import { Label } from '@/components/Form/Label';
 import { Row } from '@/components/Form/Row';
 
 import styles from './QuizOptions.module.scss';
+import { DragAndDropArea } from '@/components/DragAndDropArea';
+import { FileFormats } from '@/constants/files';
+import { Image } from '@/components/Image';
+import { FORM_CONFIG } from '@/constants/formConfig';
+import { Button } from '@/components/Button';
 
+
+const imageFormats: FileFormats[] = [FileFormats.JPG, FileFormats.PNG];
 
 type Props = {
     title: string;
@@ -18,12 +26,13 @@ type Props = {
     imageUrlError?: string;
     onTitleChange: (value: string) => void;
     onDescriptionChange: (value: string) => void;
-    onImageUrlChange: (value: string) => void;
+    onImageChange: (files: File[]) => void;
+    onImageClear: () => void;
 }
 
 export const QuizOptions: FC<Props> = ({
     title, titleError, description, descriptionError, imageUrl, imageUrlError,
-    onTitleChange, onDescriptionChange, onImageUrlChange
+    onTitleChange, onDescriptionChange, onImageChange, onImageClear
 }) => {
 
 
@@ -62,15 +71,28 @@ export const QuizOptions: FC<Props> = ({
 
                 <Row>
                     <Label>
-                        <Typography textId="editor.options.fields.imageUrl" />
+                        <Typography textId="editor.options.fields.image" />
                     </Label>
                     <FeedbackWrapper errors={imageUrlError}>
-                        <Input
-                            value={imageUrl}
-                            isInvalid={!!imageUrlError}
-                            placeholder="editor.options.fields.imageUrl.placeholder"
-                            onChange={e => onImageUrlChange(e.currentTarget.value)}
-                        />
+                        {!!imageUrl ? (
+                            <div className={styles.image}>
+                                <Image src={imageUrl} />
+
+                                <Button
+                                    variant="icon"
+                                    className={styles.imageDeleteAction}
+                                    onClick={onImageClear}
+                                >
+                                    <MdDeleteOutline />
+                                </Button>
+                            </div>
+                        ) : (
+                            <DragAndDropArea
+                                acceptedFormats={imageFormats}
+                                maxSizeInMB={FORM_CONFIG.quiz.image.maxSizeInMb}
+                                onFilesChange={onImageChange}
+                            />
+                        )}
                     </FeedbackWrapper>
                 </Row>
 
