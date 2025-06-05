@@ -67,8 +67,7 @@
     "editor.options.fields.title.placeholder": "Введите название",
     "editor.options.fields.description": "Описание",
     "editor.options.fields.description.placeholder": "Введите описание",
-    "editor.options.fields.imageUrl": "Фото",
-    "editor.options.fields.imageUrl.placeholder": "Введите сссылку на фото",
+    "editor.options.fields.image": "Картинка",
 
     "editor.questions.title": "Вопросы",
 
@@ -79,6 +78,10 @@
     "myQuizzes.noContent": "У вас еще нет квизов",
     "myQuizzes.actions.create": "Новый квиз",
     "myQuizzes.actions.delete.message": "Вы действительно хотите удалить квиз \"{{value}}\"",
+
+    "dnd.text": "Выберите файл или перетащите его сюда",
+    "dnd.accept": "Форматы: {{value}}",
+    "dnd.size": "Макс. размер - {{value}}",
 
     "error.unknown": "Что-то пошло не так",
     "error.default.text": "Ошибка",

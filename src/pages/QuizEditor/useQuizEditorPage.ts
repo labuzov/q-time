@@ -10,6 +10,7 @@ import { quizApi } from '@/api/quizApi';
 import { firebaseAuth } from '@/firebaseConfig';
 import { FORM_CONFIG } from '@/constants/formConfig';
 import { QuestionDto, QuizDto } from '@/@types/quiz';
+import { convertImageToBase64 } from '@/utils/files';
 
 
 const getValidationSchema = () => Yup.object().shape({
@@ -21,8 +22,7 @@ const getValidationSchema = () => Yup.object().shape({
         .required(getValidationText(Validation.Required))
         .min(FORM_CONFIG.quiz.description.min, getValidationText(Validation.MinLength, { value: FORM_CONFIG.quiz.description.min }))
         .max(FORM_CONFIG.quiz.description.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.description.max })),
-    imageUrl: Yup.string()
-        .max(FORM_CONFIG.quiz.imageUrl.max, getValidationText(Validation.MaxLength, { value: FORM_CONFIG.quiz.imageUrl.max })),
+    imageUrl: Yup.string(),
     questions: Yup.array<QuestionDto, QuestionDto>()
         .min(FORM_CONFIG.questions.minCount, getValidationText(Validation.MinQuestionsLength, { value: FORM_CONFIG.questions.minCount }))
         .max(FORM_CONFIG.questions.maxCount, getValidationText(Validation.MaxQuestionsLength, { value: FORM_CONFIG.questions.maxCount }))
@@ -115,6 +115,15 @@ export const useQuizEditorPage = () => {
         setFieldValue('questions', newQuestions);
     }
 
+    const setImage = (files: File[]) => {
+        const file = files[0];
+        if (!file) return;
+
+        convertImageToBase64(file, (base64) => {
+            setFieldValue('imageUrl', base64);
+        });
+    }
+
     const submit = async () => {
         const quiz: QuizDto = {
             title: values.title,
@@ -144,6 +153,7 @@ export const useQuizEditorPage = () => {
         addQuestion,
         editQuestion,
         removeQuestion,
+        setImage,
         submit
     }
 }
